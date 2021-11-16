@@ -1,0 +1,52 @@
+.content{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.area-form{
+ padding: 20px;
+ height: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+
+}
+
+.form-login{
+  max-width: 300px;
+}
+
+.area-opcoes{
+  padding: 20px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+}
+
+.area-opcoes-open{
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+.area-opcoes-close{
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.input-field{
+  margin-top: 0;
+}
+
+.area-opcoes button{
+  margin: 10px;
+}
+
+.area-titulo-pagina{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

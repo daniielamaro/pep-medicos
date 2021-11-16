@@ -1,46 +1,34 @@
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { ToastrModule } from "ngx-toastr";
-import { FormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
-import { SidebarModule } from './sidebar/sidebar.module';
-import { FooterModule } from './shared/footer/footer.module';
-import { NavbarModule} from './shared/navbar/navbar.module';
-import { FixedPluginModule} from './shared/fixedplugin/fixedplugin.module';
 
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AppRoutes } from './app.routing';
-
-import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { NovaConsultaComponent } from './pages/nova-consulta/nova-consulta.component';
-import { HistoricoConsultasComponent } from './pages/historico-consultas/historico-consultas.component';
-
-
-
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UrlService } from './shared/class/url-service';
+import { StorageService } from './shared/class/storage.service';
+import { LoginComponent } from './login/login.component';
+import { HomeMedicoComponent } from './home-medico/home-medico.component';
+import { HomeAdministrativoComponent } from './home-administrativo/home-administrativo.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AdminLayoutComponent,
-    NovaConsultaComponent,
-    HistoricoConsultasComponent,
-    
-  ],
+    LoginComponent,
+    HomeMedicoComponent,
+    HomeAdministrativoComponent
+   ],
   imports: [
-    BrowserAnimationsModule,
-    RouterModule.forRoot(AppRoutes,{
-      useHash: true
-    }),
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
     FormsModule,
-    SidebarModule,
-    NavbarModule,
-    ToastrModule.forRoot(),
-    FooterModule,
-    FixedPluginModule,
-    HttpClientModule
+    ReactiveFormsModule
   ],
-  providers: [ HttpClientModule],
+  providers: [
+    UrlService,
+    StorageService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

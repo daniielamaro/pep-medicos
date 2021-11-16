@@ -1,1 +1,24 @@
-<router-outlet></router-outlet>
+<div *ngIf="router.url != '/login'" class="content">
+  <div class="row">
+
+    <div class="col s12 l3">
+      <div class="area-perfil">
+        <div class="perfil">
+          <div class="foto-perfil-area">
+            <img src="../../assets/perfil.jpg" width="100%" height="100%" />
+          </div>
+          <span class="nome-perfil">Munir de Souza Nunes</span>
+          <span class="">CPF: 111.111.111-11</span>
+          <span class="especialidade-perfil">Medico</span>
+        </div>
+        <button class="waves-effect waves-light btn red darken-2">Sair</button>
+      </div>
+    </div>
+
+    <div class="col s12 l9">
+      <router-outlet></router-outlet>
+    </div>
+
+  </div>
+</div>
+<router-outlet *ngIf="router.url == '/login'"></router-outlet>
