@@ -24,7 +24,7 @@ export class HomeAdministrativoComponent implements OnInit {
   paginaBt4: number = 1;
   paginaBt5: number = 1;
   paginaBt6: number = 1;
-  paginaBt7: number = 8;
+  paginaBt7: number = 1;
 
   listaPesquisa: any;
   listaFinal: any;

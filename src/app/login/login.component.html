@@ -25,7 +25,9 @@
             <form class="col s12 form-login">
               <div class="input-field col s12">
                 <input id="email" type="text" class="validate">
-                <label for="email">Email</label>
+                <label *ngIf="tipoDeAcesso == 1" for="email">CRM ou Email</label>
+                <label *ngIf="tipoDeAcesso == 2" for="email">COREM ou Email</label>
+                <label *ngIf="tipoDeAcesso == 3" for="email">CPF ou Email</label>
               </div>
               <div class="input-field col s12">
                 <input id="password" type="password" class="validate">
