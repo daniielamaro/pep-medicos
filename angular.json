@@ -124,5 +124,8 @@
       }
     }
   },
-  "defaultProject": "pep-medicos"
+  "defaultProject": "pep-medicos",
+  "cli": {
+    "analytics": "459eb2fa-70b7-4a80-82f0-1f677c0a9ea7"
+  }
 }

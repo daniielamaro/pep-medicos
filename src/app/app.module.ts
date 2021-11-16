@@ -10,13 +10,15 @@ import { StorageService } from './shared/class/storage.service';
 import { LoginComponent } from './login/login.component';
 import { HomeMedicoComponent } from './home-medico/home-medico.component';
 import { HomeAdministrativoComponent } from './home-administrativo/home-administrativo.component';
+import { CadastrarFuncionarioComponent } from './adm/cadastrar-funcionario/cadastrar-funcionario.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeMedicoComponent,
-    HomeAdministrativoComponent
+    HomeAdministrativoComponent,
+    CadastrarFuncionarioComponent
    ],
   imports: [
     BrowserModule,

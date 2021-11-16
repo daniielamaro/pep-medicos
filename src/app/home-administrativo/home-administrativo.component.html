@@ -1,6 +1,6 @@
 <div class="row area-conteudo">
   <div class="content">
-    <div style="width: 100%;" class="row">
+    <div style="width: 100%; margin-bottom: 0;" class="row">
       <div class="col s12">
 
         <div class="row">
@@ -40,7 +40,7 @@
           </div>
         </div>
 
-        <div class="row">
+        <div *ngIf="!(paginaBt7 <= paginaBt1)" class="row">
           <div style="display: flex; justify-content: center; align-items: center;" class="col s12">
             <button *ngIf="!(paginaBt7 <= paginaBt1)" [ngClass]="{'blue-grey darken-1':paginaAtual == paginaBt1}" (click)="montarListaFinal(paginaBt1)" class="waves-effect waves-light btn">{{paginaBt1}}</button>
             <button *ngIf="paginaAtual >= 5" disabled class="waves-effect waves-light btn"> ... </button>
