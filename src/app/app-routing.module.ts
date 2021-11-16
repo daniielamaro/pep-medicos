@@ -1,3 +1,4 @@
+import { CadastrarFuncionarioComponent } from './adm/cadastrar-funcionario/cadastrar-funcionario.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeAdministrativoComponent } from './home-administrativo/home-administrativo.component';
@@ -8,7 +9,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: '', component: HomeAdministrativoComponent },
   { path: 'medico', component: HomeMedicoComponent },
-  { path: 'administracao', component: HomeAdministrativoComponent }
+  { path: 'administracao', component: HomeAdministrativoComponent },
+  { path: 'cadastrar-funcionario', component: CadastrarFuncionarioComponent }
 ];
 
 @NgModule({
