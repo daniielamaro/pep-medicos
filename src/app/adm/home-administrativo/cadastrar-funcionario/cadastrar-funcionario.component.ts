@@ -34,7 +34,6 @@ export class CadastrarFuncionarioComponent implements OnInit {
   }
 
   async cadastrar() {
-    console.log(this.tipoCadastro);
     switch(Number(this.tipoCadastro)){
       case 1: await this.cadastrarMedico(); break;
       case 2: await this.cadastrarEnfermeiro(); break;
