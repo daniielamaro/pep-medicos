@@ -23,6 +23,9 @@
     </div>
 
     <div class="col s12 l9">
+      <div class="area-nome-clinica" *ngIf="user && router.url != '/login'" >
+        {{user.clinica.nomeClinica}}
+      </div>
       <router-outlet></router-outlet>
     </div>
 

@@ -17,6 +17,8 @@ import { LoginService } from './login/login.service';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { RedirectGuard } from './shared/auth/redirect.guard';
 import { CadastroService } from './adm/home-administrativo/cadastrar-funcionario/cadastro.service';
+import { Alertas } from './shared/class/alertas';
+import { HomeAdministrativoService } from './adm/home-administrativo/home-administrativo.service';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,9 @@ import { CadastroService } from './adm/home-administrativo/cadastrar-funcionario
     StorageService,
     LoginService,
     RedirectGuard,
-    CadastroService
+    CadastroService,
+    Alertas,
+    HomeAdministrativoService
   ],
   bootstrap: [AppComponent]
 })

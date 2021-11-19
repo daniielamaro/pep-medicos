@@ -2,6 +2,7 @@
   width: 100vw;
   height: 100vh;
   padding: 20px;
+  overflow-x: hidden;
 }
 
 .area-perfil{
@@ -15,8 +16,6 @@
   align-items: center;
   box-shadow: 2px 2px 5px black;
 }
-
-
 
 .area-topo-resumo{
   width: 100%;
@@ -38,6 +37,25 @@
   padding: 10px;
   text-align: center;
   color: #26a69a;
+}
+
+.area-nome-clinica{
+  width: 100%;
+  height: auto;
+  padding: 30px;
+  border-radius: 20px;
+  margin-left: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #26a69a;
+  font-size: large;
+  font-weight: bolder;
+  margin-bottom: 20px;
+  margin-left: 0;
+  text-align: center;
+  box-shadow: 2px 2px 5px black;
 }
 
 .resumo-espaco-esq{

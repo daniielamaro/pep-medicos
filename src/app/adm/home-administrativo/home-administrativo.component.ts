@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { StorageService } from 'src/app/shared/class/storage.service';
 import { UrlService } from 'src/app/shared/class/url-service';
+import { HomeAdministrativoService } from './home-administrativo.service';
 
 @Component({
   selector: 'app-home-administrativo',
@@ -12,11 +13,7 @@ export class HomeAdministrativoComponent implements OnInit {
 
   user: any;
 
-  listaCompleta: any = [
-    {id: 1, nome: 'Jacinto Pinto', email: 'jacinto@email.com', funcao: 'Medico'},
-    {id: 2, nome: 'Munir Nunes', email: 'munir@email.com', funcao: 'Enfermeiro'},
-    {id: 3, nome: 'Daniel Amaro', email: 'daniel@email.com', funcao: 'Agente Administrativo'}
-  ];
+  listaCompleta: any;
 
   nomePesquisa: string;
   tamanhoPagina: number = 10;
@@ -34,7 +31,7 @@ export class HomeAdministrativoComponent implements OnInit {
   listaPesquisa: any;
   listaFinal: any;
 
-  constructor(private router: Router, private storage: StorageService, private urlService: UrlService) {
+  constructor(private router: Router, private homeAdministrativoService: HomeAdministrativoService, private storage: StorageService, private urlService: UrlService) {
     this.router.events.subscribe((evt) => {
       if (evt instanceof NavigationEnd && this.router.url == "/administrativo") {
         this.ngOnInit();
@@ -47,8 +44,12 @@ export class HomeAdministrativoComponent implements OnInit {
     let token = await this.storage.get("token");
     await this.urlService.validateToken(token);
 
-    this.listaPesquisa = this.listaCompleta;
-    this.montarListaFinal(1);
+    (await this.homeAdministrativoService.getListaFuncionarios(this.user.clinica.id))
+      .subscribe((resp: any)=>{
+        this.listaCompleta = resp;
+        this.listaPesquisa = this.listaCompleta;
+        this.montarListaFinal(1);
+      });
   }
 
   pesquisar(){
