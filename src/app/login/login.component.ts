@@ -32,15 +32,29 @@ export class LoginComponent implements OnInit {
 
   async entrarMedico(){
     (await this.loginService.entrarMedico(this.usuario, this.senha))
-      .subscribe((resp: any) => {
-        console.log(resp);
+      .subscribe(async (resp: any) => {
+        let user = resp.medico;
+        user["esp"] = "medico";
+        await this.storage.set("token", resp.token);
+        await this.storage.set("user", user);
+        this.usuario = undefined;
+        this.senha = undefined;
+
+        this.router.navigateByUrl('medico');
       });
   }
 
   async entrarEnfermeiro(){
     (await this.loginService.entrarEnfermeiro(this.usuario, this.senha))
-      .subscribe((resp: any) => {
-        console.log(resp);
+      .subscribe(async (resp: any) => {
+        let user = resp.enfermeiro;
+        user["esp"] = "enfermeiro";
+        await this.storage.set("token", resp.token);
+        await this.storage.set("user", user);
+        this.usuario = undefined;
+        this.senha = undefined;
+
+        this.router.navigateByUrl('medico');
       });
   }
 

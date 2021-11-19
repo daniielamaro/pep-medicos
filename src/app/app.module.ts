@@ -15,6 +15,7 @@ import { NovoAtendimentoComponent } from './medico/home-medico/novo-atendimento/
 import { HistoricoAtendimentoComponent } from './historico-atendimento/historico-atendimento.component';
 import { LoginService } from './login/login.service';
 import { IonicStorageModule } from '@ionic/storage-angular';
+import { RedirectGuard } from './shared/auth/redirect.guard';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { IonicStorageModule } from '@ionic/storage-angular';
   providers: [
     UrlService,
     StorageService,
-    LoginService
+    LoginService,
+    RedirectGuard
   ],
   bootstrap: [AppComponent]
 })
