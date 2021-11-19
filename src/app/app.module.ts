@@ -8,9 +8,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UrlService } from './shared/class/url-service';
 import { StorageService } from './shared/class/storage.service';
 import { LoginComponent } from './login/login.component';
-import { HomeMedicoComponent } from './home-medico/home-medico.component';
-import { HomeAdministrativoComponent } from './home-administrativo/home-administrativo.component';
-import { CadastrarFuncionarioComponent } from './adm/cadastrar-funcionario/cadastrar-funcionario.component';
+import { HomeMedicoComponent } from './medico/home-medico/home-medico.component';
+import { HomeAdministrativoComponent } from './adm/home-administrativo/home-administrativo.component';
+import { CadastrarFuncionarioComponent } from './adm/home-administrativo/cadastrar-funcionario/cadastrar-funcionario.component';
+import { NovoAtendimentoComponent } from './medico/home-medico/novo-atendimento/novo-atendimento.component';
+import { HistoricoAtendimentoComponent } from './historico-atendimento/historico-atendimento.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { CadastrarFuncionarioComponent } from './adm/cadastrar-funcionario/cadas
     LoginComponent,
     HomeMedicoComponent,
     HomeAdministrativoComponent,
-    CadastrarFuncionarioComponent
+    CadastrarFuncionarioComponent,
+    NovoAtendimentoComponent,
+    HistoricoAtendimentoComponent
    ],
   imports: [
     BrowserModule,

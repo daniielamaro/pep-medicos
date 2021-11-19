@@ -1,16 +1,17 @@
-import { CadastrarFuncionarioComponent } from './adm/cadastrar-funcionario/cadastrar-funcionario.component';
+import { CadastrarFuncionarioComponent } from './adm/home-administrativo/cadastrar-funcionario/cadastrar-funcionario.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeAdministrativoComponent } from './home-administrativo/home-administrativo.component';
-import { HomeMedicoComponent } from './home-medico/home-medico.component';
+import { HomeAdministrativoComponent } from './adm/home-administrativo/home-administrativo.component';
+import { HomeMedicoComponent } from './medico/home-medico/home-medico.component';
 import { LoginComponent } from './login/login.component';
+import {NovoAtendimentoComponent} from './medico/home-medico/novo-atendimento/novo-atendimento.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
-  { path: '', component: HomeAdministrativoComponent },
   { path: 'medico', component: HomeMedicoComponent },
-  { path: 'administracao', component: HomeAdministrativoComponent },
-  { path: 'cadastrar-funcionario', component: CadastrarFuncionarioComponent }
+  { path: 'administrativo', component: HomeAdministrativoComponent },
+  { path: 'administrativo/cadastrar-funcionario', component: CadastrarFuncionarioComponent },
+  { path: 'medico/novo-atendimento', component: NovoAtendimentoComponent }
 ];
 
 @NgModule({

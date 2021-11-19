@@ -9,9 +9,11 @@ export class LoginComponent implements OnInit {
 
   tipoDeAcesso: number;
 
-  constructor() { }
-
+  constructor() {
+  }
+  
   ngOnInit() {
+    this.tipoDeAcesso = 1;
   }
 
 }
