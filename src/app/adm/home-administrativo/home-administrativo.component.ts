@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { StorageService } from 'src/app/shared/class/storage.service';
+import { UrlService } from 'src/app/shared/class/url-service';
 
 @Component({
   selector: 'app-home-administrativo',
@@ -6,6 +9,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home-administrativo.component.scss']
 })
 export class HomeAdministrativoComponent implements OnInit {
+
+  user: any;
 
   listaCompleta: any = [
     {id: 1, nome: 'Jacinto Pinto', email: 'jacinto@email.com', funcao: 'Medico'},
@@ -29,9 +34,23 @@ export class HomeAdministrativoComponent implements OnInit {
   listaPesquisa: any;
   listaFinal: any;
 
-  constructor() { }
+  constructor(private router: Router, private storage: StorageService, private urlService: UrlService) {
+    this.router.events.subscribe((evt) => {
+      if (evt instanceof NavigationEnd && this.router.url == "/administrativo") {
+        this.pageEnter();
+      }
+    });
+  }
 
   ngOnInit(): void {
+
+  }
+
+  async pageEnter(){
+    this.user = await this.storage.get("user");
+    let token = await this.storage.get("token");
+    await this.urlService.validateToken(token);
+
     this.listaPesquisa = this.listaCompleta;
     this.montarListaFinal(1);
   }

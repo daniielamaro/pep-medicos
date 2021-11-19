@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { StorageService } from '../shared/class/storage.service';
 import { LoginService } from './login.service';
 
 @Component({
@@ -13,7 +15,7 @@ export class LoginComponent implements OnInit {
   usuario: string;
   senha: string;
 
-  constructor(private loginService: LoginService) {
+  constructor(private loginService: LoginService, private router: Router, private storage: StorageService) {
   }
 
   ngOnInit() {
@@ -44,8 +46,15 @@ export class LoginComponent implements OnInit {
 
   async entrarAgente(){
     (await this.loginService.entrarAgente(this.usuario, this.senha))
-      .subscribe((resp: any) => {
-        console.log(resp);
+      .subscribe(async (resp: any) => {
+        let user = resp.agente;
+        user["esp"] = "agente";
+        await this.storage.set("token", resp.token);
+        await this.storage.set("user", user);
+        this.usuario = undefined;
+        this.senha = undefined;
+
+        this.router.navigateByUrl('administrativo');
       });
   }
 
