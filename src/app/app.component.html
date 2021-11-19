@@ -1,7 +1,7 @@
-<div *ngIf="router.url != '/login'" class="content">
+<div class="content">
   <div class="row">
 
-    <div *ngIf="user" class="col s12 l3">
+    <div *ngIf="user && router.url != '/login'" class="col s12 l3">
       <div class="area-perfil">
         <div class="perfil">
           <div class="foto-perfil-area">
@@ -28,4 +28,3 @@
 
   </div>
 </div>
-<router-outlet *ngIf="router.url == '/login'"></router-outlet>

@@ -91,5 +91,4 @@ export class HomeAdministrativoComponent implements OnInit {
     }
 
   }
-
 }
