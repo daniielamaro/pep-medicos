@@ -1,35 +1,45 @@
-<div class="row">
+<div class="row" class="area-cadastro">
     <form class="col s12">
-        <div>
-
-        </div>
         <div class="row">
             <div class="input-field col s10">
-                <select class="browser-default">
-                  <option value="" selected>Escolha uma opção</option>
-                  <option value="1">Médico</option>
-                  <option value="2">Enfermeiro</option>
-                  <option value="3">Agente Administrativo</option>
+                <select [(ngModel)]="tipoCadastro" name="tipoCadastro" class="browser-default">
+                    <option value="0">Escolha uma opção</option>
+                    <option value="1">Médico</option>
+                    <option value="2">Enfermeiro</option>
+                    <option value="3">Agente Administrativo</option>
                 </select>
             </div>
-       </div>
-      <div class="row">
-        <div class="input-field col s10">
-          <input placeholder="Ex: Alberto da silva santos" id="nomeCompleto" type="text" class="validate">
-          <label for="nomeCompleto">Nome completo</label>
         </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s10">
-          <input id="email" type="email"  placeholder="Ex: exemplo@gmail.com" class="validate">
-          <label for="email">Email</label>
+        <div *ngIf="tipoCadastro != 0">
+            <div class="row">
+                <div class="input-field col s10">
+                    <input id="nomeCompleto" [(ngModel)]="nome" name="nome" type="text" class="validate" required>
+                    <label for="nomeCompleto">Nome completo</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s10">
+                    <input id="email" type="email" [(ngModel)]="email" name="email"class="validate" required>
+                    <label for="email">Email</label>
+                </div>
+            </div>
+            <div class="row">
+                <div *ngIf="tipoCadastro == 1" class="input-field col s10" required>
+                    <input id="crm" type="text"  class="validate">
+                    <label for="crm">CRM</label>
+                </div>
+                <div *ngIf="tipoCadastro == 2" class="input-field col s10" required>
+                    <input id="corem" type="text"  class="validate">
+                    <label for="corem">COREM</label>
+                </div>
+                <div *ngIf="tipoCadastro == 3"  class="input-field col s10" required>
+                    <input id="cpf" type="text"  class="validate">
+                    <label for="cpf">CPF</label>
+                </div>
+            </div>
+
+            <button class="btn waves-effect waves-light"  type="submit" (click)="cadastrarFuncionario()" name="action">Cadastrar</button>
+            <button class="btn waves-effect waves-light" style="margin-left: 10px;background-color: #616161;" type="submit" name="action">Cancelar</button>
         </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s10">
-            <input id="cpf" type="text"  placeholder="Ex: 999.999.999-99" class="validate">
-            <label for="cpf">CPF</label>
-          </div>
-      </div>
     </form>
   </div>
