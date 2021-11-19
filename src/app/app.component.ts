@@ -16,9 +16,6 @@ export class AppComponent implements OnInit {
 
   async ngOnInit(){
     this.user = await this.storage.get("user");
-    console.log(this.user);
-    let token = await this.storage.get("token");
-    await this.urlService.validateToken(token);
   }
 
   sair(){

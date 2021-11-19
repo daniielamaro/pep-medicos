@@ -6,13 +6,14 @@ import { HomeMedicoComponent } from './medico/home-medico/home-medico.component'
 import { LoginComponent } from './login/login.component';
 import {NovoAtendimentoComponent} from './medico/home-medico/novo-atendimento/novo-atendimento.component';
 import { MedicoGuard } from './shared/auth/medico.guard';
+import { AdministrativoGuard } from './shared/auth/administrativo.guard';
 
 const routes: Routes = [
-  { path: '', component: HomeAdministrativoComponent },
+  { path: '', component: HomeAdministrativoComponent, canActivate: [AdministrativoGuard] },
   { path: 'login', component: LoginComponent},
   { path: 'medico', component: HomeMedicoComponent, canActivate: [MedicoGuard] },
-  { path: 'administrativo', component: HomeAdministrativoComponent },
-  { path: 'administrativo/cadastrar-funcionario', component: CadastrarFuncionarioComponent },
+  { path: 'administrativo', component: HomeAdministrativoComponent, canActivate: [AdministrativoGuard] },
+  { path: 'administrativo/cadastrar-funcionario', component: CadastrarFuncionarioComponent, canActivate: [AdministrativoGuard] },
   { path: 'medico/novo-atendimento', component: NovoAtendimentoComponent, canActivate: [MedicoGuard] }
 ];
 

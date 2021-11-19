@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
 import { StorageService } from '../class/storage.service';
 import { RedirectGuard } from './redirect.guard';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MedicoGuard implements CanActivate {
+export class AdministrativoGuard implements CanActivate {
 
   constructor(private storage: StorageService, private redirectGuard: RedirectGuard) { }
 
@@ -17,12 +16,11 @@ export class MedicoGuard implements CanActivate {
 
     let user = await this.storage.get("user");
 
-    if(!user || (user && user.esp != 'medico' && user.esp != 'enfermeiro')){
+    if(!user || (user && user.esp != 'agente')){
       this.redirectGuard.redirect();
       return false;
     }
 
     return true;
-
   }
 }

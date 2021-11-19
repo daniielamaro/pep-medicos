@@ -37,16 +37,12 @@ export class HomeAdministrativoComponent implements OnInit {
   constructor(private router: Router, private storage: StorageService, private urlService: UrlService) {
     this.router.events.subscribe((evt) => {
       if (evt instanceof NavigationEnd && this.router.url == "/administrativo") {
-        this.pageEnter();
+        this.ngOnInit();
       }
     });
   }
 
-  ngOnInit(): void {
-
-  }
-
-  async pageEnter(){
+  async ngOnInit() {
     this.user = await this.storage.get("user");
     let token = await this.storage.get("token");
     await this.urlService.validateToken(token);
