@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { StorageService } from './shared/class/storage.service';
 import { UrlService } from './shared/class/url-service';
 
@@ -12,7 +12,13 @@ export class AppComponent implements OnInit {
 
   user: any;
 
-  constructor(public router: Router, private storage: StorageService, private urlService: UrlService) {}
+  constructor(public router: Router, private storage: StorageService, private urlService: UrlService) {
+    this.router.events.subscribe((evt) => {
+      if (evt instanceof NavigationEnd) {
+        this.ngOnInit();
+      }
+    });
+  }
 
   async ngOnInit(){
     this.user = await this.storage.get("user");

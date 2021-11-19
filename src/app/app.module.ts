@@ -16,6 +16,7 @@ import { HistoricoAtendimentoComponent } from './historico-atendimento/historico
 import { LoginService } from './login/login.service';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { RedirectGuard } from './shared/auth/redirect.guard';
+import { CadastroService } from './adm/home-administrativo/cadastrar-funcionario/cadastro.service';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { RedirectGuard } from './shared/auth/redirect.guard';
     UrlService,
     StorageService,
     LoginService,
-    RedirectGuard
+    RedirectGuard,
+    CadastroService
   ],
   bootstrap: [AppComponent]
 })

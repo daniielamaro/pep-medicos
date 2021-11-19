@@ -9,6 +9,15 @@ export class CadastroService {
   constructor(private urlService: UrlService) { }
 
   async cadastrarMedico(request: any){
+    console.log("teste");
     return await this.urlService.sendRequestPost("/Medico/Cadastrar", JSON.stringify(request));
+  }
+
+  async cadastrarEnfermeiro(request: any){
+    return await this.urlService.sendRequestPost("/Enfermeiro/Cadastrar", JSON.stringify(request));
+  }
+
+  async cadastrarAgente(request: any){
+    return await this.urlService.sendRequestPost("/AgenteAdm/Cadastrar", JSON.stringify(request));
   }
 }
