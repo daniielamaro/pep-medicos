@@ -13,6 +13,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'medico', component: HomeMedicoComponent, canActivate: [MedicoGuard] },
   { path: 'administrativo', component: HomeAdministrativoComponent, canActivate: [AdministrativoGuard] },
+  { path: 'cadastrar-funcionario', component: CadastrarFuncionarioComponent, canActivate: [AdministrativoGuard] },
   { path: 'administrativo/cadastrar-funcionario', component: CadastrarFuncionarioComponent, canActivate: [AdministrativoGuard] },
   { path: 'medico/novo-atendimento', component: NovoAtendimentoComponent, canActivate: [MedicoGuard] }
 ];
