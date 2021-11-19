@@ -13,6 +13,7 @@ import { HomeAdministrativoComponent } from './adm/home-administrativo/home-admi
 import { CadastrarFuncionarioComponent } from './adm/home-administrativo/cadastrar-funcionario/cadastrar-funcionario.component';
 import { NovoAtendimentoComponent } from './medico/home-medico/novo-atendimento/novo-atendimento.component';
 import { HistoricoAtendimentoComponent } from './historico-atendimento/historico-atendimento.component';
+import { LoginService } from './login/login.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { HistoricoAtendimentoComponent } from './historico-atendimento/historico
   ],
   providers: [
     UrlService,
-    StorageService
+    StorageService,
+    LoginService
   ],
   bootstrap: [AppComponent]
 })

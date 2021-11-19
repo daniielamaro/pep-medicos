@@ -9,6 +9,7 @@ import {NovoAtendimentoComponent} from './medico/home-medico/novo-atendimento/no
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'medico', component: HomeMedicoComponent },
+  { path: '', component: HomeAdministrativoComponent },
   { path: 'administrativo', component: HomeAdministrativoComponent },
   { path: 'administrativo/cadastrar-funcionario', component: CadastrarFuncionarioComponent },
   { path: 'medico/novo-atendimento', component: NovoAtendimentoComponent }
