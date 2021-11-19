@@ -12,7 +12,7 @@ export class UrlService {
   constructor(private storage: StorageService, private router: Router, private http: HttpClient) {}
 
   async validateToken(token: string){
-    (await this.sendRequestPost("/Paciente/VerificarToken?token="+token))
+    (await this.sendRequestPost("/Usuario/VerificarToken?token="+token))
       .subscribe(() => {},
       error => {
         if(error.status == 400 || error.status == 401 || error.status == 403){

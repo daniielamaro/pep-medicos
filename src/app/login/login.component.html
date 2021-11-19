@@ -24,18 +24,18 @@
           <div class="row">
             <form class="col s12 form-login">
               <div class="input-field col s12">
-                <input id="email" type="text" class="validate">
+                <input id="email" type="text" [(ngModel)]="usuario" name="usuario" class="validate">
                 <label *ngIf="tipoDeAcesso == 1" for="email">CRM ou Email</label>
                 <label *ngIf="tipoDeAcesso == 2" for="email">COREM ou Email</label>
                 <label *ngIf="tipoDeAcesso == 3" for="email">CPF ou Email</label>
               </div>
               <div class="input-field col s12">
-                <input id="password" type="password" class="validate">
+                <input id="password" type="password" [(ngModel)]="senha" name="senha" class="validate">
                 <label for="password">Senha</label>
               </div>
               <div class="row">
                 <div style="display: flex; justify-content: center;" class="col s12">
-                  <button class="waves-effect waves-light btn">Entrar</button>
+                  <button (click)="entrar()" class="waves-effect waves-light btn">Entrar</button>
                 </div>
               </div>
             </form>
