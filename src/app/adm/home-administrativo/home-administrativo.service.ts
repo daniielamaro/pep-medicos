@@ -12,4 +12,8 @@ export class HomeAdministrativoService {
     return await this.urlService.sendRequestPost("/AgenteAdm/GetListaFuncionario?idClinica="+id);
   }
 
+  async deletarFuncionario(id: string){
+    return await this.urlService.sendRequestDelete("/AgenteAdm/DeleteAgente?id="+id);
+  }
+
 }

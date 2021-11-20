@@ -1,45 +1,75 @@
 <div class="row" class="area-cadastro">
     <div class="col s12">
-        <div class="row">
-            <div class="input-field col s10">
-                <select [(ngModel)]="tipoCadastro" name="tipoCadastro" class="browser-default">
-                    <option value="0">Escolha uma opção</option>
-                    <option value="1">Médico</option>
-                    <option value="2">Enfermeiro</option>
-                    <option value="3">Agente Administrativo</option>
-                </select>
-            </div>
+        <div class="col s2">
+          <button class="btn waves-effect waves-light" routerLink="/administrativo">Voltar</button>
         </div>
-        <div *ngIf="tipoCadastro != 0">
-            <div class="row">
-                <div class="input-field col s10">
-                    <input id="nomeCompleto" [(ngModel)]="nome" name="nome" type="text" class="validate" required>
-                    <label for="nomeCompleto">Nome completo</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s10">
-                    <input id="email" type="email" [(ngModel)]="email" name="email" class="validate" required>
-                    <label for="email">Email</label>
-                </div>
-            </div>
-            <div class="row">
-                <div *ngIf="tipoCadastro == 1" class="input-field col s10" required>
-                    <input id="crm" type="text"  [(ngModel)]="crm" name="crm" class="validate">
-                    <label for="crm">CRM</label>
-                </div>
-                <div *ngIf="tipoCadastro == 2" class="input-field col s10" required>
-                    <input id="corem" type="text" [(ngModel)]="corem" name="corem"  class="validate">
-                    <label for="corem">COREM</label>
-                </div>
-                <div *ngIf="tipoCadastro == 3"  class="input-field col s10" required>
-                    <input id="cpf" type="text" [(ngModel)]="cpf" name="cpf" class="validate">
-                    <label for="cpf">CPF</label>
-                </div>
-            </div>
+        <div *ngIf="tipoCadastro == 0 && !funcCadastrado && !funcionarioEdit" class="row area-opcoes">
+          <span class="titulo-opcoes">Selecione uma opção de funcionário</span>
+          <button (click)="tipoCadastro = 1" class="waves-effect waves-light btn">Médico(a)</button>
+          <button (click)="tipoCadastro = 2" class="waves-effect waves-light btn">Enfermeiro(a)</button>
+          <button (click)="tipoCadastro = 3" class="waves-effect waves-light btn">Agente Administrativo</button>
+        </div>
+        <div *ngIf="(tipoCadastro != 0 && !funcCadastrado) || funcionarioEdit">
+          <div class="row">
+            <div *ngIf="tipoCadastro == 1 && !editando" class="col s12 titulo-opcoes">Novo médico(a)</div>
+            <div *ngIf="tipoCadastro == 2 && !editando" class="col s12 titulo-opcoes">Novo enfermeiro(a)</div>
+            <div *ngIf="tipoCadastro == 3 && !editando" class="col s12 titulo-opcoes">Novo agente administrativo</div>
 
+            <div *ngIf="tipoCadastro == 1 && editando" class="col s12 titulo-opcoes">Alterar médico(a)</div>
+            <div *ngIf="tipoCadastro == 2 && editando" class="col s12 titulo-opcoes">Alterar enfermeiro(a)</div>
+            <div *ngIf="tipoCadastro == 3 && editando" class="col s12 titulo-opcoes">Alterar agente administrativo</div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+                <input id="nomeCompleto" [(ngModel)]="nome" name="nome" type="text" class="validate" required>
+                <label class="active" for="nomeCompleto">Nome completo</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s6">
+                <input id="email" type="email" [(ngModel)]="email" name="email" class="validate" required>
+                <label class="active" for="email">Email</label>
+            </div>
+            <div *ngIf="tipoCadastro == 1" class="input-field col s6" required>
+                <input id="crm" type="text"  [(ngModel)]="crm" name="crm" class="validate">
+                <label class="active" for="crm">CRM</label>
+            </div>
+            <div *ngIf="tipoCadastro == 2" class="input-field col s6" required>
+                <input id="corem" type="text" [(ngModel)]="corem" name="corem"  class="validate">
+                <label class="active" for="corem">COREM</label>
+            </div>
+            <div *ngIf="tipoCadastro == 3"  class="input-field col s6" required>
+                <input id="cpf" type="text" [(ngModel)]="cpf" name="cpf" class="validate">
+                <label class="active" for="cpf">CPF</label>
+            </div>
+          </div>
+
+          <div *ngIf="!editando" style="display: flex; justify-content: center; align-items: center;" class="row">
             <button class="btn waves-effect waves-light" (click)="cadastrar()" name="action">Cadastrar</button>
-            <button class="btn waves-effect waves-light" style="margin-left: 10px;background-color: #616161;" name="action">Cancelar</button>
+            <button class="btn waves-effect waves-light" (click)="tipoCadastro = 0" style="margin-left: 10px;background-color: #616161;" name="action">Cancelar</button>
+          </div>
+
+          <div *ngIf="editando" style="display: flex; justify-content: center; align-items: center;" class="row">
+            <button class="btn waves-effect waves-light" (click)="cadastrar()" name="action">Alterar</button>
+            <button class="btn waves-effect waves-light red darken-2" style="margin-left: 10px;">Resetar senha</button>
+          </div>
+        </div>
+
+        <div *ngIf="funcCadastrado" class="row area-opcoes">
+          <span *ngIf="tipoCadastro == 1 && !editando" class="titulo-opcoes">Médico(a) cadastrado!</span>
+          <span *ngIf="tipoCadastro == 2 && !editando" class="titulo-opcoes">Enfermeiro(a) cadastrado!</span>
+          <span *ngIf="tipoCadastro == 3 && !editando" class="titulo-opcoes">Agente administrativo cadastrado!</span>
+          <span style="margin-bottom: 50px;" class="subtitulo-opcoes">Anote essas informações elas só serão exibidas uma vez.</span>
+
+          <div style="width: 100%;" class="row">
+            <div style="text-align: flex-start;" class="col s3">Nome: </div><div class="col s8">{{funcCadastrado.nome}}</div>
+          </div>
+          <div style="width: 100%;" class="row">
+            <div style="text-align: flex-start;" class="col s3">Email: </div><div class="col s8">{{funcCadastrado.email}}</div>
+          </div>
+          <div style="width: 100%;" class="row">
+            <div style="text-align: flex-start;" class="col s3">Senha Temporaria: </div><div class="col s8">{{funcCadastrado.senha}}</div>
+          </div>
         </div>
     </div>
   </div>

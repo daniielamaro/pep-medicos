@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { Alertas } from 'src/app/shared/class/alertas';
 import { StorageService } from 'src/app/shared/class/storage.service';
 import { UrlService } from 'src/app/shared/class/url-service';
 import { HomeAdministrativoService } from './home-administrativo.service';
@@ -31,7 +32,12 @@ export class HomeAdministrativoComponent implements OnInit {
   listaPesquisa: any;
   listaFinal: any;
 
-  constructor(private router: Router, private homeAdministrativoService: HomeAdministrativoService, private storage: StorageService, private urlService: UrlService) {
+  constructor(
+    private router: Router,
+    private alertas: Alertas,
+    private homeAdministrativoService: HomeAdministrativoService,
+    private storage: StorageService,
+    private urlService: UrlService) {
     this.router.events.subscribe((evt) => {
       if (evt instanceof NavigationEnd && this.router.url == "/administrativo") {
         this.ngOnInit();
@@ -43,7 +49,10 @@ export class HomeAdministrativoComponent implements OnInit {
     this.user = await this.storage.get("user");
     let token = await this.storage.get("token");
     await this.urlService.validateToken(token);
+    await this.atualizarLista();
+  }
 
+  async atualizarLista(){
     (await this.homeAdministrativoService.getListaFuncionarios(this.user.clinica.id))
       .subscribe((resp: any)=>{
         this.listaCompleta = resp;
@@ -91,5 +100,28 @@ export class HomeAdministrativoComponent implements OnInit {
       this.paginaBt6 = this.paginaBt7-1;
     }
 
+  }
+
+  alterarFuncionario(id: string){
+
+  }
+
+  deletarFuncionario(id: string){
+    this.alertas.warningAlert("Realmente deseja deletar este funcionário?")
+      .then(async (result) => {
+        if (result.isConfirmed) {
+          this.alertas.showLoading("Deletando funcionario...");
+          (await this.homeAdministrativoService.deletarFuncionario(id))
+            .subscribe(async () => {
+              this.alertas.fecharModal();
+              this.alertas.sucesso("Funcionario deletado!");
+              await this.atualizarLista();
+            },
+            error => {
+              this.alertas.fecharModal();
+              this.alertas.erro(error.error);
+            });
+        }
+      });
   }
 }

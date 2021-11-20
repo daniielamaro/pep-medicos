@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { StorageService } from 'src/app/shared/class/storage.service';
 import { UrlService } from 'src/app/shared/class/url-service';
 import { CadastroService } from './cadastro.service';
@@ -17,9 +17,19 @@ export class CadastrarFuncionarioComponent implements OnInit {
   corem:string = '';
   crm:string = '';
 
+  editando: boolean = false;
+
   user: any;
 
-  constructor(private cadastroService: CadastroService, private storage: StorageService, private urlService: UrlService, private router: Router){
+  funcionarioEdit: any;
+  funcCadastrado: any;
+
+  constructor(
+    private cadastroService: CadastroService,
+    private storage: StorageService,
+    private actvRouter: ActivatedRoute,
+    private urlService: UrlService,
+    private router: Router){
     this.router.events.subscribe((evt) => {
       if (evt instanceof NavigationEnd && (this.router.url == "/administrativo/cadastrar-funcionario" || this.router.url == "/cadastrar-funcionario")) {
         this.ngOnInit();
@@ -28,9 +38,42 @@ export class CadastrarFuncionarioComponent implements OnInit {
   }
 
   async ngOnInit() {
+    this.funcCadastrado = undefined;
+    this.funcionarioEdit = undefined;
     this.user = await this.storage.get("user");
     let token = await this.storage.get("token");
     await this.urlService.validateToken(token);
+
+    this.actvRouter.params.subscribe(async params => {
+      let id = params['id'];
+      let tipo = params['tipo'];
+      if(id){
+        this.editando = true;
+        switch(tipo){
+          case 'medico': this.tipoCadastro = 1; (await this.cadastroService.getMedicoById(id))
+                            .subscribe((resp: any) => {
+                              this.funcionarioEdit = resp;
+                              this.nome = this.funcionarioEdit.nome;
+                              this.email = this.funcionarioEdit.email;
+                              this.crm = this.funcionarioEdit.crm;
+                            }); break;
+          case 'enfermeiro': this.tipoCadastro = 2; (await this.cadastroService.getEnfermeiroById(id))
+                              .subscribe((resp: any) => {
+                                this.funcionarioEdit = resp;
+                                this.nome = this.funcionarioEdit.nome;
+                                this.email = this.funcionarioEdit.email;
+                                this.corem = this.funcionarioEdit.corem;
+                              }); break;
+          case 'agente': this.tipoCadastro = 3; (await this.cadastroService.getAgenteById(id))
+                          .subscribe((resp: any) => {
+                            this.funcionarioEdit = resp;
+                            this.nome = this.funcionarioEdit.nome;
+                            this.email = this.funcionarioEdit.email;
+                            this.cpf = this.funcionarioEdit.cpf;
+                          }); break;
+        }
+      }
+    });
   }
 
   async cadastrar() {
@@ -51,7 +94,7 @@ export class CadastrarFuncionarioComponent implements OnInit {
 
     (await this.cadastroService.cadastrarMedico(request))
       .subscribe((resp: any) =>{
-        this.router.navigateByUrl("administrativo");
+        this.funcCadastrado = resp;
       })
   }
 
@@ -65,7 +108,7 @@ export class CadastrarFuncionarioComponent implements OnInit {
 
     (await this.cadastroService.cadastrarEnfermeiro(request))
       .subscribe((resp: any) =>{
-        this.router.navigateByUrl("administrativo");
+        this.funcCadastrado = resp;
       })
   }
 
@@ -79,7 +122,7 @@ export class CadastrarFuncionarioComponent implements OnInit {
 
     (await this.cadastroService.cadastrarAgente(request))
       .subscribe((resp: any) =>{
-        this.router.navigateByUrl("administrativo");
+        this.funcCadastrado = resp;
       })
   }
 

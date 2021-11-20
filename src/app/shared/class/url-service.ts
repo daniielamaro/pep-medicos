@@ -6,8 +6,8 @@ import { StorageService } from './storage.service';
 @Injectable()
 export class UrlService {
 
-  //static BACKEND_URL = 'http://localhost:54439';
-  static BACKEND_URL = 'http://34.68.18.75:8080';
+  static BACKEND_URL = 'http://localhost:54439';
+  //static BACKEND_URL = 'http://34.68.18.75:8080';
 
   constructor(private storage: StorageService, private router: Router, private http: HttpClient) {}
 
@@ -27,6 +27,18 @@ export class UrlService {
     let token = await this.storage.get("token");
 
     return this.http.post(UrlService.BACKEND_URL+url, body, {
+      headers: new HttpHeaders()
+        .set('Content-Type', 'application/json')
+        .set('Authorization', 'BEARER ' + token)
+    });
+
+  }
+
+  async sendRequestDelete(url: string){
+
+    let token = await this.storage.get("token");
+
+    return this.http.delete(UrlService.BACKEND_URL+url, {
       headers: new HttpHeaders()
         .set('Content-Type', 'application/json')
         .set('Authorization', 'BEARER ' + token)

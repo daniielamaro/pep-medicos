@@ -13,7 +13,7 @@
                 <i class="material-icons">search</i></button>
             </div>
             <div style="display: flex; align-items: flex-end; justify-content: flex-end; height: 60px" class="col s4">
-              <button routerLink="cadastrar-funcionario" class="waves-effect waves-light btn">
+              <button routerLink="/cadastrar-funcionario" class="waves-effect waves-light btn">
                 <i class="material-icons left">add</i>
                 Cadastrar funcionario
               </button>
@@ -31,10 +31,12 @@
           <div class="row" *ngFor="let item of listaFinal">
             <div class="col s3 conteudo-tabela-inicio">{{item.nome}}</div>
             <div class="col s4 conteudo-tabela">{{item.email}}</div>
-            <div class="col s3 conteudo-tabela">{{item.funcao}}</div>
+            <div *ngIf="item.funcao == 'medico'" class="col s3 conteudo-tabela">Médico(a)</div>
+            <div *ngIf="item.funcao == 'enfermeiro'" class="col s3 conteudo-tabela">Enfermeiro(a)</div>
+            <div *ngIf="item.funcao == 'agente'" class="col s3 conteudo-tabela">Agente Administrativo</div>
             <div class="col s2 menu-item-tabela">
-              <i (click)="teste(i)" class="material-icons menu-edit">edit</i>
-              <i class="material-icons menu-delete">delete</i>
+              <i [routerLink]="'/cadastrar-funcionario/'+item.id+'/'+item.funcao" class="material-icons menu-edit">edit</i>
+              <i (click)="deletarFuncionario(item.id)" class="material-icons menu-delete">delete</i>
             </div>
           </div>
         </div>
