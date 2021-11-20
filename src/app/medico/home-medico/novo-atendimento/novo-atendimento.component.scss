@@ -1,0 +1,111 @@
+.content{
+    width: 100% !important;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .area-conteudo{
+    width: 100%;
+    height: auto;
+    padding: 30px;
+    border-radius: 20px;
+    margin-left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 2px 2px 5px black;
+  
+  }
+  
+  .topo-tabela{
+    border-bottom: 1px solid #000;
+  }
+  
+  .topo-tabela .titulo-tabela{
+    border-left: 1px solid #000;
+  }
+  
+  .titulo-tabela-inicio{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  
+  .titulo-tabela{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .titulo-tabela-fim{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  
+  .conteudo-tabela-inicio{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  
+  .conteudo-tabela{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .conteudo-tabela-fim{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  
+  .menu-item-tabela{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  
+  .menu-item-tabela i{
+    cursor: pointer;
+  }
+  
+  .menu-edit{
+    transition: ease-in-out 0.2s;
+    color: black;
+  }
+  
+  .menu-edit:hover{
+    color: blue;
+  }
+  
+  .menu-delete{
+    transition: ease-in-out 0.2s;
+    color: black;
+  }
+  
+  .menu-delete:hover{
+    color: red;
+  }
+  
+  .input-search{
+    padding: 10px;
+    border-radius: 3px;
+    width: 100%;
+    margin-top: 10px;
+    border: 0;
+    background-color: #ddd;
+    color: #333;
+  }
+  
+  .input-search::placeholder {
+    color: #888;
+    opacity: 1;
+  }
+  

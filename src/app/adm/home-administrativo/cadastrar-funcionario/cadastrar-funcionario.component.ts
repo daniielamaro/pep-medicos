@@ -31,7 +31,7 @@ export class CadastrarFuncionarioComponent implements OnInit {
     private urlService: UrlService,
     private router: Router){
     this.router.events.subscribe((evt) => {
-      if (evt instanceof NavigationEnd && (this.router.url == "/administrativo/cadastrar-funcionario" || this.router.url == "/cadastrar-funcionario")) {
+      if (evt instanceof NavigationEnd && this.router.url == "/administrativo/cadastrar-funcionario") {
         this.ngOnInit();
       }
     });
