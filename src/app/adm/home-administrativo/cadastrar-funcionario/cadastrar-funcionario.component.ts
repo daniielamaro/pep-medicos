@@ -22,12 +22,14 @@ export class CadastrarFuncionarioComponent implements OnInit {
   constructor(private cadastroService: CadastroService, private storage: StorageService, private urlService: UrlService, private router: Router){
     this.router.events.subscribe((evt) => {
       if (evt instanceof NavigationEnd && this.router.url == "/administrativo/cadastrar-funcionario") {
+       
         this.ngOnInit();
       }
     });
   }
 
   async ngOnInit() {
+  
     this.user = await this.storage.get("user");
     let token = await this.storage.get("token");
     await this.urlService.validateToken(token);
