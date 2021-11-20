@@ -16,6 +16,7 @@ export class HomeAdministrativoComponent implements OnInit {
 
   listaCompleta: any;
 
+  pesquisaFiltrada: boolean = false;
   nomePesquisa: string;
   tamanhoPagina: number = 10;
 
@@ -53,19 +54,35 @@ export class HomeAdministrativoComponent implements OnInit {
   }
 
   async atualizarLista(){
+    this.alertas.showLoading("Atualizando a lista...");
     (await this.homeAdministrativoService.getListaFuncionarios(this.user.clinica.id))
       .subscribe((resp: any)=>{
         this.listaCompleta = resp;
-        this.listaPesquisa = this.listaCompleta;
+        this.pesquisar();
         this.montarListaFinal(1);
+        this.alertas.fecharModal();
       });
   }
 
   pesquisar(){
+    if(this.nomePesquisa?.trim()) this.pesquisaFiltrada = true;
+    else this.pesquisaFiltrada = false;
+
     this.listaPesquisa = this.listaCompleta.filter(item => {
-      return item.nome.toUpperCase().includes(this.nomePesquisa.toUpperCase());
+      return item.nome
+                .trimStart()
+                .trimEnd()
+                .toUpperCase()
+                .includes(this.nomePesquisa?.trimStart()
+                                            .trimEnd()
+                                            .toUpperCase() ?? "");
     });
     this.montarListaFinal(1);
+  }
+
+  async limparPesquisa(){
+    this.nomePesquisa = undefined;
+    await this.atualizarLista();
   }
 
   montarListaFinal(page: number){
@@ -99,10 +116,6 @@ export class HomeAdministrativoComponent implements OnInit {
       this.paginaBt5 = this.paginaBt7-2;
       this.paginaBt6 = this.paginaBt7-1;
     }
-
-  }
-
-  alterarFuncionario(id: string){
 
   }
 

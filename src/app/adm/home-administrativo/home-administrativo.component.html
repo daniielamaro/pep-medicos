@@ -13,11 +13,26 @@
                 <i class="material-icons">search</i></button>
             </div>
             <div style="display: flex; align-items: flex-end; justify-content: flex-end; height: 60px" class="col s4">
-              <button routerLink="/cadastrar-funcionario" class="waves-effect waves-light btn">
+              <button routerLink="/cadastrar-funcionario" class="waves-effect waves-light btn truncate">
                 <i class="material-icons left">add</i>
                 Cadastrar funcionario
               </button>
             </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div style="padding-left: 0" class="col s3">
+            <button (click)="atualizarLista()" class="waves-effect waves-light btn truncate">
+              <i class="material-icons left">refresh</i>
+              Atualizar lista
+            </button>
+          </div>
+          <div style="padding-left: 0" class="col s3">
+            <button [disabled]="!pesquisaFiltrada" (click)="limparPesquisa()" class="waves-effect waves-light btn truncate">
+              <i class="material-icons left">clear</i>
+              Limpar filtro
+            </button>
           </div>
         </div>
 
