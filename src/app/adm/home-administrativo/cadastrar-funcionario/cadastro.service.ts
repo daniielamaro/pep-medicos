@@ -31,4 +31,28 @@ export class CadastroService {
   async getAgenteById(id: string){
     return await this.urlService.sendRequestPost("/AgenteAdm/GetAgenteById?id="+id);
   }
+
+  async resetarSenhaEnfermeiro(id: string){
+    return await this.urlService.sendRequestPost("/Enfermeiro/ResetSenha?id="+id);
+  }
+
+  async resetarSenhaMedico(id: string){
+    return await this.urlService.sendRequestPost("/Medico/ResetSenha?id="+id);
+  }
+
+  async resetarSenhaAgente(id: string){
+    return await this.urlService.sendRequestPost("/AgenteAdm/ResetSenha?id="+id);
+  }
+
+  async updateEnfermeiro(request: any){
+    return await this.urlService.sendRequestPost("/Enfermeiro/Update", JSON.stringify(request));
+  }
+
+  async updateMedico(request: any){
+    return await this.urlService.sendRequestPost("/Medico/Update", JSON.stringify(request));
+  }
+
+  async updateAgente(request: any){
+    return await this.urlService.sendRequestPost("/AgenteAdm/Update", JSON.stringify(request));
+  }
 }

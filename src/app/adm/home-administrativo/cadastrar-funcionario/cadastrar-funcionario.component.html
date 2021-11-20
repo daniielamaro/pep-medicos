@@ -50,8 +50,8 @@
           </div>
 
           <div *ngIf="editando" style="display: flex; justify-content: center; align-items: center;" class="row">
-            <button class="btn waves-effect waves-light" (click)="cadastrar()" name="action">Alterar</button>
-            <button class="btn waves-effect waves-light red darken-2" style="margin-left: 10px;">Resetar senha</button>
+            <button class="btn waves-effect waves-light" (click)="alterar()" name="action">Alterar</button>
+            <button class="btn waves-effect waves-light red darken-2" (click)="resetarSenha()" style="margin-left: 10px;">Resetar senha</button>
           </div>
         </div>
 
@@ -59,6 +59,11 @@
           <span *ngIf="tipoCadastro == 1 && !editando" class="titulo-opcoes">Médico(a) cadastrado!</span>
           <span *ngIf="tipoCadastro == 2 && !editando" class="titulo-opcoes">Enfermeiro(a) cadastrado!</span>
           <span *ngIf="tipoCadastro == 3 && !editando" class="titulo-opcoes">Agente administrativo cadastrado!</span>
+
+          <span *ngIf="tipoCadastro == 1 && editando" class="titulo-opcoes">Senha do Médico(a) resetada!</span>
+          <span *ngIf="tipoCadastro == 2 && editando" class="titulo-opcoes">Senha do Enfermeiro(a) resetada!</span>
+          <span *ngIf="tipoCadastro == 3 && editando" class="titulo-opcoes">Senha do Agente administrativo resetada!</span>
+
           <span style="margin-bottom: 50px;" class="subtitulo-opcoes">Anote essas informações elas só serão exibidas uma vez.</span>
 
           <div style="width: 100%;" class="row">
