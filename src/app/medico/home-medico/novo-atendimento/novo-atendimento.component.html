@@ -1,1 +1,55 @@
-<p>novo-atendimento works!</p>
+<div class="row area-conteudo">
+    <div class="content">
+      <div style="width: 100%; margin-bottom: 0;" class="row">
+        <div class="col s12">
+          <div class="row">
+            <div class="row">
+              <div class="input-field col s6">
+                <input placeholder="Digite o nome do paciente" id="pesquisar" [(ngModel)]="nomePesquisa" type="text" class="validate browser-default input-search">
+              </div>
+              <div style="display: flex; align-items: flex-end; height: 60px" class="col s2">
+                <button (click)="pesquisar()" class="waves-effect waves-light btn">
+                  <i class="material-icons">search</i></button>
+              </div>
+        
+            </div>
+          </div>
+  
+          <div class="row">
+            <div class="row topo-tabela">
+              <div class="col s4 titulo-tabela-inicio">Paciente</div>
+              <div class="col s4 titulo-tabela">Email</div>
+              <div class="col s2 titulo-tabela">Nascimento</div>
+              <div class="col s2 titulo-tabela">Ações</div>
+            </div>
+            <div class="row" *ngFor="let item of listaFinal">
+              <div class="col s4 conteudo-tabela-inicio">{{item.nome}}</div>
+              <div class="col s4 conteudo-tabela">{{item.email}}</div>
+              <div class="col s2 titulo-tabela">Nascimento</div>
+              <div class="col s2 menu-item-tabela">
+                <i (click)="teste(i)" class="material-icons menu-edit">add</i>
+              </div>
+            </div>
+          </div>
+  
+          <div *ngIf="!(paginaBt7 <= paginaBt1)" class="row">
+            <div style="display: flex; justify-content: center; align-items: center;" class="col s12">
+              <button *ngIf="!(paginaBt7 <= paginaBt1)" [ngClass]="{'blue-grey darken-1':paginaAtual == paginaBt1}" (click)="montarListaFinal(paginaBt1)" class="waves-effect waves-light btn">{{paginaBt1}}</button>
+              <button *ngIf="paginaAtual >= 5" disabled class="waves-effect waves-light btn"> ... </button>
+              <button *ngIf="!(paginaBt7 <= paginaBt2)" [ngClass]="{'blue-grey darken-1':paginaAtual == paginaBt2}" (click)="montarListaFinal(paginaBt2)" class="waves-effect waves-light btn">{{paginaBt2}}</button>
+              <button *ngIf="!(paginaBt7 <= paginaBt3)" [ngClass]="{'blue-grey darken-1':paginaAtual == paginaBt3}" (click)="montarListaFinal(paginaBt3)" class="waves-effect waves-light btn">{{paginaBt3}}</button>
+              <button *ngIf="!(paginaBt7 <= paginaBt4)" [ngClass]="{'blue-grey darken-1':paginaAtual == paginaBt4}" (click)="montarListaFinal(paginaBt4)" class="waves-effect waves-light btn">{{paginaBt4}}</button>
+              <button *ngIf="!(paginaBt7 <= paginaBt5)" [ngClass]="{'blue-grey darken-1':paginaAtual == paginaBt5}" (click)="montarListaFinal(paginaBt5)" class="waves-effect waves-light btn">{{paginaBt5}}</button>
+              <button *ngIf="!(paginaBt7 <= paginaBt6)" [ngClass]="{'blue-grey darken-1':paginaAtual == paginaBt6}" (click)="montarListaFinal(paginaBt6)" class="waves-effect waves-light btn">{{paginaBt6}}</button>
+              <button *ngIf="paginaAtual <= paginaBt7-4" disabled class="waves-effect waves-light btn"> ... </button>
+              <button *ngIf="!(paginaBt7 <= paginaBt1)" [ngClass]="{'blue-grey darken-1':paginaAtual == paginaBt7}" (click)="montarListaFinal(paginaBt7)" class="waves-effect waves-light btn"> {{paginaBt7}} </button>
+            </div>
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  

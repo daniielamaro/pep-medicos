@@ -19,6 +19,7 @@ import { RedirectGuard } from './shared/auth/redirect.guard';
 import { CadastroService } from './adm/home-administrativo/cadastrar-funcionario/cadastro.service';
 import { Alertas } from './shared/class/alertas';
 import { HomeAdministrativoService } from './adm/home-administrativo/home-administrativo.service';
+import { HistoricoPrescricaoComponent } from './medico/home-medico/historico-prescricao/historico-prescricao.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { HomeAdministrativoService } from './adm/home-administrativo/home-admini
     HomeAdministrativoComponent,
     CadastrarFuncionarioComponent,
     NovoAtendimentoComponent,
-    HistoricoAtendimentoComponent
+    HistoricoAtendimentoComponent,
+    HistoricoPrescricaoComponent
    ],
   imports: [
     BrowserModule,
