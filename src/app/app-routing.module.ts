@@ -7,6 +7,7 @@ import { LoginComponent } from './login/login.component';
 import {NovoAtendimentoComponent} from './medico/home-medico/novo-atendimento/novo-atendimento.component';
 import { MedicoGuard } from './shared/auth/medico.guard';
 import { AdministrativoGuard } from './shared/auth/administrativo.guard';
+import { HistoricoAtendimentoComponent } from './medico/home-medico/historico-atendimento/historico-atendimento.component';
 
 const routes: Routes = [
   { path: '', component: HomeAdministrativoComponent, canActivate: [AdministrativoGuard] },
@@ -15,7 +16,8 @@ const routes: Routes = [
   { path: 'administrativo', component: HomeAdministrativoComponent, canActivate: [AdministrativoGuard] },
   { path: 'cadastrar-funcionario', component: CadastrarFuncionarioComponent, canActivate: [AdministrativoGuard] },
   { path: 'administrativo/cadastrar-funcionario', component: CadastrarFuncionarioComponent, canActivate: [AdministrativoGuard] },
-  { path: 'medico/novo-atendimento', component: NovoAtendimentoComponent, canActivate: [MedicoGuard] }
+  { path: 'medico/novo-atendimento', component: NovoAtendimentoComponent, canActivate: [MedicoGuard] },
+  { path: 'medico/historico-atendimento', component: HistoricoAtendimentoComponent, canActivate: [MedicoGuard] }
 ];
 
 @NgModule({

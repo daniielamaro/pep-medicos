@@ -16,27 +16,24 @@ export class CadastrarFuncionarioComponent implements OnInit {
   cpf:string = '';
   corem:string = '';
   crm:string = '';
-
   user: any;
 
   constructor(private cadastroService: CadastroService, private storage: StorageService, private urlService: UrlService, private router: Router){
     this.router.events.subscribe((evt) => {
       if (evt instanceof NavigationEnd && this.router.url == "/administrativo/cadastrar-funcionario") {
-       
         this.ngOnInit();
       }
     });
   }
 
   async ngOnInit() {
-  
+
     this.user = await this.storage.get("user");
     let token = await this.storage.get("token");
     await this.urlService.validateToken(token);
   }
 
   async cadastrar() {
-    console.log(this.tipoCadastro);
     switch(Number(this.tipoCadastro)){
       case 1: await this.cadastrarMedico(); break;
       case 2: await this.cadastrarEnfermeiro(); break;

@@ -12,11 +12,13 @@ import { HomeMedicoComponent } from './medico/home-medico/home-medico.component'
 import { HomeAdministrativoComponent } from './adm/home-administrativo/home-administrativo.component';
 import { CadastrarFuncionarioComponent } from './adm/home-administrativo/cadastrar-funcionario/cadastrar-funcionario.component';
 import { NovoAtendimentoComponent } from './medico/home-medico/novo-atendimento/novo-atendimento.component';
-import { HistoricoAtendimentoComponent } from './historico-atendimento/historico-atendimento.component';
+import { HistoricoAtendimentoComponent } from './medico/home-medico/historico-atendimento/historico-atendimento.component';
 import { LoginService } from './login/login.service';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { RedirectGuard } from './shared/auth/redirect.guard';
 import { CadastroService } from './adm/home-administrativo/cadastrar-funcionario/cadastro.service';
+import { Alertas } from './shared/class/alertas';
+import { HomeAdministrativoService } from './adm/home-administrativo/home-administrativo.service';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,9 @@ import { CadastroService } from './adm/home-administrativo/cadastrar-funcionario
     StorageService,
     LoginService,
     RedirectGuard,
-    CadastroService
+    CadastroService,
+    Alertas,
+    HomeAdministrativoService
   ],
   bootstrap: [AppComponent]
 })
