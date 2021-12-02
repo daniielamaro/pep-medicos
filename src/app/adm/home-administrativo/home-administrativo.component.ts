@@ -70,12 +70,8 @@ export class HomeAdministrativoComponent implements OnInit {
 
     this.listaPesquisa = this.listaCompleta.filter(item => {
       return item.nome
-                .trimStart()
-                .trimEnd()
                 .toUpperCase()
-                .includes(this.nomePesquisa?.trimStart()
-                                            .trimEnd()
-                                            .toUpperCase() ?? "");
+                .includes(this.nomePesquisa?.toUpperCase() ?? "");
     });
     this.montarListaFinal(1);
   }
