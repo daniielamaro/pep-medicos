@@ -3,7 +3,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { Alertas } from 'src/app/shared/class/alertas';
 import { StorageService } from 'src/app/shared/class/storage.service';
 import { UrlService } from 'src/app/shared/class/url-service';
-import { HomeAtendimentoService } from './home-atendimento.service';
+import { HistoricoAtendimentoService } from './historico-atendimento.service';
 
 @Component({
   selector: 'app-historico-atendimento',
@@ -36,12 +36,12 @@ export class HistoricoAtendimentoComponent implements OnInit {
   constructor(
     private router: Router,
     private storage: StorageService,
-    private homeAtendimentoService: HomeAtendimentoService,
+    private historicoAtendimentoService: HistoricoAtendimentoService,
     private alertas: Alertas,
     private urlService: UrlService
   ) {
     this.router.events.subscribe((evt) => {
-      if (evt instanceof NavigationEnd && this.router.url == "/administrativo") {
+      if (evt instanceof NavigationEnd && this.router.url == "/medico/historico-atendimento") {
         this.ngOnInit();
       }
     });
@@ -63,7 +63,7 @@ export class HistoricoAtendimentoComponent implements OnInit {
 
   async atualizarListaMedico(){
     this.alertas.showLoading("Atualizando a lista...");
-    (await this.homeAtendimentoService.getListaAtendimentosMedico())
+    (await this.historicoAtendimentoService.getListaAtendimentosMedico())
       .subscribe((resp: any)=>{
         this.listaCompleta = resp;
         console.log(this.listaCompleta);
@@ -75,7 +75,7 @@ export class HistoricoAtendimentoComponent implements OnInit {
 
   async atualizarListaEnfermeiro(){
     this.alertas.showLoading("Atualizando a lista...");
-    (await this.homeAtendimentoService.getListaAtendimentosEnfermeiro())
+    (await this.historicoAtendimentoService.getListaAtendimentosEnfermeiro())
       .subscribe((resp: any)=>{
         this.listaCompleta = resp;
         console.log(this.listaCompleta);

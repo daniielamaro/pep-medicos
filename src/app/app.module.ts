@@ -20,7 +20,8 @@ import { CadastroService } from './adm/home-administrativo/cadastrar-funcionario
 import { Alertas } from './shared/class/alertas';
 import { HomeAdministrativoService } from './adm/home-administrativo/home-administrativo.service';
 import { HistoricoPrescricaoComponent } from './medico/home-medico/historico-prescricao/historico-prescricao.component';
-import { HomeAtendimentoService } from './medico/home-medico/historico-atendimento/home-atendimento.service';
+import { HistoricoPrescricaoService } from './medico/home-medico/historico-prescricao/historico-prescricao.service';
+import { HistoricoAtendimentoService } from './medico/home-medico/historico-atendimento/historico-atendimento.service';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { HomeAtendimentoService } from './medico/home-medico/historico-atendimen
     CadastroService,
     Alertas,
     HomeAdministrativoService,
-    HomeAtendimentoService
+    HistoricoAtendimentoService,
+    HistoricoPrescricaoService
   ],
   bootstrap: [AppComponent]
 })
