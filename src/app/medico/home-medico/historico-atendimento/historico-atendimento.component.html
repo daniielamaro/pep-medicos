@@ -48,7 +48,7 @@
       </div>
       <div class="row" *ngFor="let item of listaFinal">
         <div class="col s3 conteudo-tabela-inicio">{{item.paciente.nome}}</div>
-        <div class="col s4 conteudo-tabela">{{item.consulta.diaRealizacao}}</div>
+        <div class="col s4 conteudo-tabela">{{item.consulta.diaRealizacao | date: 'dd/MM/yyyy'}} às {{item.consulta.diaRealizacao | date: 'HH:mm'}}</div>
         <div *ngIf="item.funcao == 'medico'" class="col s3 conteudo-tabela">item.consulta.tipo.nome</div>
       </div>
     </div>
