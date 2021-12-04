@@ -8,8 +8,12 @@ export class HomeAtendimentoService {
 
   constructor(private urlService: UrlService) { }
 
-  async getListaAtendimentos(id: string){
+  async getListaAtendimentosMedico(){
     return await this.urlService.sendRequestPost("/Medico/GetHistoricoAtendimento");
+  }
+
+  async getListaAtendimentosEnfermeiro(){
+    return await this.urlService.sendRequestPost("/Enfermeiro/GetHistoricoAtendimento");
   }
 
 }

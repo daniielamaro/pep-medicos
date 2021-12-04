@@ -55,8 +55,15 @@ export class HistoricoAtendimentoComponent implements OnInit {
   }
 
   async atualizarLista(){
+    switch(this.user.funcao){
+      case 'medico': await this.atualizarListaMedico(); break;
+      case 'enfermeiro': await this.atualizarListaEnfermeiro(); break;
+    }
+  }
+
+  async atualizarListaMedico(){
     this.alertas.showLoading("Atualizando a lista...");
-    (await this.homeAtendimentoService.getListaAtendimentos(this.user.id))
+    (await this.homeAtendimentoService.getListaAtendimentosMedico())
       .subscribe((resp: any)=>{
         this.listaCompleta = resp;
         console.log(this.listaCompleta);
@@ -66,7 +73,17 @@ export class HistoricoAtendimentoComponent implements OnInit {
       });
   }
 
-
+  async atualizarListaEnfermeiro(){
+    this.alertas.showLoading("Atualizando a lista...");
+    (await this.homeAtendimentoService.getListaAtendimentosEnfermeiro())
+      .subscribe((resp: any)=>{
+        this.listaCompleta = resp;
+        console.log(this.listaCompleta);
+        this.pesquisar();
+        this.montarListaFinal(1);
+        this.alertas.fecharModal();
+      });
+  }
 
   pesquisar(){
     if(this.nomePesquisa?.trim()) this.pesquisaFiltrada = true;
