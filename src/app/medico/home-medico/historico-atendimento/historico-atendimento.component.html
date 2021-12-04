@@ -1,1 +1,71 @@
-<p>historico-atendimento works!</p>
+<div class="area-conteudo">
+  <div class="content">
+    <div class="row">
+      <div style="display: flex; align-items: center; justify-content: center;" class="col s3">
+        <button routerLink="/medico" class="waves-effect waves-light btn truncate">
+          <i class="material-icons left">arrow_back</i>
+          Voltar
+        </button>
+      </div>
+      <div class="col s6 titulo-conteudo">
+        <h5>Histórico de Atendimento</h5>
+      </div>
+      <div class="col s3"></div>
+    </div>
+
+    <div class="row">
+      <div class="row">
+        <div class="input-field col s6">
+          <input placeholder="Digite o nome do paciente" id="pesquisar" [(ngModel)]="nomePesquisa" type="text" class="validate browser-default input-search">
+        </div>
+        <div style="display: flex; align-items: flex-end; height: 60px" class="col s4">
+          <button (click)="pesquisar()" class="waves-effect waves-light btn">
+            <i class="material-icons">search</i></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div style="padding-left: 0" class="col s3">
+        <button (click)="atualizarLista()" class="waves-effect waves-light btn truncate">
+          <i class="material-icons left">refresh</i>
+          Atualizar lista
+        </button>
+      </div>
+      <div style="padding-left: 0" class="col s3">
+        <button [disabled]="!pesquisaFiltrada" (click)="limparPesquisa()" class="waves-effect waves-light btn truncate">
+          <i class="material-icons left">clear</i>
+          Limpar filtro
+        </button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="row topo-tabela">
+        <div class="col s3 titulo-tabela-inicio">Nome</div>
+        <div class="col s4 titulo-tabela">Dia e Hora</div>
+        <div class="col s3 titulo-tabela">Especialidade</div>
+      </div>
+      <div class="row" *ngFor="let item of listaFinal">
+        <div class="col s3 conteudo-tabela-inicio">{{item.paciente.nome}}</div>
+        <div class="col s4 conteudo-tabela">{{item.consulta.diaRealizacao}}</div>
+        <div *ngIf="item.funcao == 'medico'" class="col s3 conteudo-tabela">item.consulta.tipo.nome</div>
+      </div>
+    </div>
+
+    <div *ngIf="!(paginaBt7 <= paginaBt1)" class="row">
+      <div style="display: flex; justify-content: center; align-items: center;" class="col s12">
+        <button *ngIf="!(paginaBt7 <= paginaBt1)" [ngClass]="{'blue-grey darken-1':paginaAtual == paginaBt1}" (click)="montarListaFinal(paginaBt1)" class="waves-effect waves-light btn">{{paginaBt1}}</button>
+        <button *ngIf="paginaAtual >= 5" disabled class="waves-effect waves-light btn"> ... </button>
+        <button *ngIf="!(paginaBt7 <= paginaBt2)" [ngClass]="{'blue-grey darken-1':paginaAtual == paginaBt2}" (click)="montarListaFinal(paginaBt2)" class="waves-effect waves-light btn">{{paginaBt2}}</button>
+        <button *ngIf="!(paginaBt7 <= paginaBt3)" [ngClass]="{'blue-grey darken-1':paginaAtual == paginaBt3}" (click)="montarListaFinal(paginaBt3)" class="waves-effect waves-light btn">{{paginaBt3}}</button>
+        <button *ngIf="!(paginaBt7 <= paginaBt4)" [ngClass]="{'blue-grey darken-1':paginaAtual == paginaBt4}" (click)="montarListaFinal(paginaBt4)" class="waves-effect waves-light btn">{{paginaBt4}}</button>
+        <button *ngIf="!(paginaBt7 <= paginaBt5)" [ngClass]="{'blue-grey darken-1':paginaAtual == paginaBt5}" (click)="montarListaFinal(paginaBt5)" class="waves-effect waves-light btn">{{paginaBt5}}</button>
+        <button *ngIf="!(paginaBt7 <= paginaBt6)" [ngClass]="{'blue-grey darken-1':paginaAtual == paginaBt6}" (click)="montarListaFinal(paginaBt6)" class="waves-effect waves-light btn">{{paginaBt6}}</button>
+        <button *ngIf="paginaAtual <= paginaBt7-4" disabled class="waves-effect waves-light btn"> ... </button>
+        <button *ngIf="!(paginaBt7 <= paginaBt1)" [ngClass]="{'blue-grey darken-1':paginaAtual == paginaBt7}" (click)="montarListaFinal(paginaBt7)" class="waves-effect waves-light btn"> {{paginaBt7}} </button>
+      </div>
+    </div>
+
+  </div>
+</div>
