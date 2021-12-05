@@ -7,8 +7,7 @@ export class NovoAtendimentoService {
 
   constructor(private urlService: UrlService) { }
 
-  async getPacienteByCpf(cpf:string){
-    return await this.urlService.sendRequestPost("/Paciente/GetPacienteByCpf?Cpf="+cpf);
-   
+  async getPacienteByFilter(request:any){
+    return await this.urlService.sendRequestPost("/Paciente/GetPacienteByFilter", JSON.stringify(request));
   }
 }

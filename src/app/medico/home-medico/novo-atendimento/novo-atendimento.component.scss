@@ -6,7 +6,7 @@
     align-items: center;
     justify-content: center;
   }
-  
+
   .area-conteudo{
     width: 100%;
     height: auto;
@@ -18,9 +18,9 @@
     justify-content: center;
     align-items: center;
     box-shadow: 2px 2px 5px black;
-  
+
   }
-  
+
   .input-search{
     padding: 10px;
     border-radius: 3px;
@@ -30,9 +30,46 @@
     background-color: #ddd;
     color: #333;
   }
-  
+
   .input-search::placeholder {
     color: #888;
     opacity: 1;
   }
-  
+
+  .card-paciente{
+    margin: 10px !important;
+    padding: 30px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 2px 2px 5px black;
+  }
+
+  .foto-perfil-area{
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    margin-bottom: 30px;
+  }
+
+  .foto-perfil-area img{
+    width: auto;
+    height: 100%;
+  }
+
+  .nome-perfil{
+    font-size: medium;
+    color: #26a69a;
+  }
+
+  .card-foto-perfil{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
