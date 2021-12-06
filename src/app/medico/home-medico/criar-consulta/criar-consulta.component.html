@@ -141,6 +141,16 @@
         <div class="col s2 titulo-tabela">Data de termino</div>
         <div class="col s1 titulo-tabela"></div>
       </div>
+      <div class="row" *ngFor="let item of paciente.medicamentos">
+        <div class="col s2 conteudo-tabela truncate">{{item.nome}}</div>
+        <div class="col s2 conteudo-tabela truncate">{{(item.tipoQuantidade != "Outro" ? item.numQuantidade + " " + item.tipoQuantidade : item.outraQuantidade)}}</div>
+        <div class="col s3 conteudo-tabela truncate">{{(item.tipoIntervalo != "Outro" ? "a cada " + item.numIntervalo + " " + item.tipoIntervalo : item.outroIntervalo)}}</div>
+        <div class="col s2 conteudo-tabela truncate">{{item.dataInicio | date: 'dd/MM/yyyy'}}</div>
+        <div *ngIf="!item.usoContinuo" class="col s2 conteudo-tabela truncate">{{item.dataTermino | date: 'dd/MM/yyyy'}}</div>
+        <div *ngIf="item.usoContinuo" class="col s2 conteudo-tabela truncate">Uso contínuo</div>
+        <div class="col s1 menu-item-tabela">
+        </div>
+      </div>
       <div class="row" *ngFor="let item of listaMedicamento">
         <div class="col s2 conteudo-tabela truncate">{{item.nome}}</div>
         <div class="col s2 conteudo-tabela truncate">{{(item.tipoQuantidade != "Outro" ? item.numQuantidade + " " + item.tipoQuantidade : item.outraQuantidade)}}</div>
