@@ -55,7 +55,7 @@ export class HistoricoPrescricaoComponent implements OnInit {
   }
 
   async atualizarLista(){
-    switch(this.user.funcao){
+    switch(this.user.esp){
       case 'medico': await this.atualizarListaMedico(); break;
       case 'enfermeiro': await this.atualizarListaEnfermeiro(); break;
     }
@@ -90,7 +90,7 @@ export class HistoricoPrescricaoComponent implements OnInit {
     else this.pesquisaFiltrada = false;
 
     this.listaPesquisa = this.listaCompleta.filter(item => {
-      return item.nome
+      return item.paciente.nome
                 .toUpperCase()
                 .includes(this.nomePesquisa?.toUpperCase() ?? "");
     });
@@ -106,7 +106,7 @@ export class HistoricoPrescricaoComponent implements OnInit {
     this.paginaAtual = page;
 
     this.listaFinal = this.listaPesquisa.slice((this.paginaAtual-1)*this.tamanhoPagina, this.paginaAtual*this.tamanhoPagina);
-
+    console.log(this.listaFinal);
     this.montarPaginacao();
   }
 
