@@ -8,87 +8,106 @@
           <img *ngIf="!paciente || !paciente.fotoPerfil" src="../assets/nophoto.png" width="100%" height="100%" />
         </div>
       </div>
-      <div  class="col s9 area-info-paciente">
+      <div  class="col s5 area-info-paciente">
         <span>{{paciente.nome}}</span>
         <span>{{paciente.cpf}}</span>
         <span>{{paciente.idade}} anos</span>
       </div>
-    </div>
-
-    <div class="row area-diagnostico">
-       <div class="col s6">
-        <label>Resumo</label>
-        <textarea style="resize: none; height: auto;" rows="6" class="browser-default"></textarea>
-       </div>
-       <div class="col s6">
-        <label>Observações</label>
-        <textarea style="resize: none; height: auto;" rows="6" class="browser-default"></textarea>
+      <div class="col s4">
+        <select [(ngModel)]="tipoConsulta" class="browser-default input-form-receita">
+          <option value="" disabled>Selecione o tipo da consulta</option>
+          <option *ngFor="let tipo of listaTipoConsulta" [value]="tipo.id">{{tipo.nome}}</option>
+        </select>
       </div>
     </div>
 
-    <div style="margin-top: 20px; margin-left: 0px;" class="row">
+    <div *ngIf="tipoConsulta" class="row area-diagnostico">
+       <div class="col s6">
+        <label>Resumo</label>
+        <textarea [(ngModel)]="resumo" nome="resumo" style="resize: none; height: auto;" rows="6" class="browser-default"></textarea>
+       </div>
+       <div class="col s6">
+        <label>Observações</label>
+        <textarea [(ngModel)]="observacoes" nome="observacoes" style="resize: none; height: auto;" rows="6" class="browser-default"></textarea>
+      </div>
+    </div>
+
+    <div *ngIf="cadastrandoMedicamento && tipoConsulta" style="margin-top: 20px; margin-left: 0px;" class="row">
       <div class="col s12">
         <label style="font-size: medium;">Receitar medicamento:</label>
       </div>
     </div>
 
-    <div style="margin-left: 0px;" class="row">
+    <div *ngIf="cadastrandoMedicamento && tipoConsulta" style="margin-left: 0px;" class="row">
       <div style="margin-left: 0px;" class="row">
         <div class="col s12">
           <label>Nome do medicamento</label>
-          <input type="text" class="browser-default input-form-receita" />
+          <input type="text" [(ngModel)]="nomeMedicamento" nome="nomeMedicamento" class="browser-default input-form-receita" />
         </div>
       </div>
       <div style="margin-left: 0px;" class="row">
         <div class="col s6">
           <label>Quantidade</label>
           <div style="display: flex; justify-content:flex-start;">
-            <input type="number" style="width: 80px;" class="browser-default input-form-receita" />
-            <select style="margin-left: 10px;" class="browser-default input-form-receita">
-              <option disabled selected>--Selecione uma opção--</option>
+            <input *ngIf="tipoQuantidade != 'Outro'" [(ngModel)]="numQuantidade" nome="numQuantidade" type="number" style="width: 80px; margin-right: 10px;" class="browser-default input-form-receita" />
+            <select [(ngModel)]="tipoQuantidade" class="browser-default input-form-receita">
+              <option value="" disabled>--Selecione uma opção--</option>
+              <option value="comprimido(s)">comprimido(s)</option>
+              <option value="Mg">Mg</option>
+              <option value="G">G</option>
+              <option value="gota(s)">gota(s)</option>
+              <option value="ML">ML</option>
+              <option value="L">L</option>
+              <option value="Outro">Outro</option>
             </select>
           </div>
-          <input type="text" placeholder="Digite a quantidade..." class="browser-default input-form-receita" />
+          <input *ngIf="tipoQuantidade == 'Outro'" [(ngModel)]="outraQuantidade" nome="outraQuantidade" type="text" placeholder="Digite a quantidade personalizada..." class="browser-default input-form-receita" />
         </div>
         <div class="col s6">
           <label>Intervalo</label>
           <div style="display: flex; justify-content:flex-start;">
-            <input type="number" style="width: 80px;" class="browser-default input-form-receita" />
-            <select style="margin-left: 10px;" class="browser-default input-form-receita">
-              <option disabled selected>--Selecione uma opção--</option>
+            <input *ngIf="tipoIntervalo != 'Outro'" [(ngModel)]="numIntervalo" nome="numIntervalo" type="number" style="width: 80px; margin-right: 10px;" class="browser-default input-form-receita" />
+            <select [(ngModel)]="tipoIntervalo" class="browser-default input-form-receita">
+              <option value="" disabled>--Selecione uma opção--</option>
+              <option value="Minuto(s)">Minuto(s)</option>
+              <option value="Hora(s)">Hora(s)</option>
+              <option value="Dia(s)">Dia(s)</option>
+              <option value="Semana(s)">Semana(s)</option>
+              <option value="Mes(es)">Mes(es)</option>
+              <option value="Outro">Outro</option>
             </select>
           </div>
-          <input type="text" placeholder="Digite o intervalo..." class="browser-default input-form-receita" />
+          <input *ngIf="tipoIntervalo == 'Outro'" [(ngModel)]="outroIntervalo" nome="outroIntervalo" type="text" placeholder="Digite o intervalo..." class="browser-default input-form-receita" />
         </div>
       </div>
       <div style="margin-left: 0px;" class="row">
         <div style="display: flex; align-items: center; justify-content: center; height: 80px" class="col s4">
           <label>
-            <input type="checkbox" class="browser-default" />
+            <input type="checkbox" [(ngModel)]="usoContinuo" class="browser-default" />
             <span>Uso continuo</span>
           </label>
         </div>
         <div class="col s4">
           <label>Data de inicio</label>
           <div style="display: flex; justify-content:flex-start;">
-            <input type="date" class="browser-default input-form-receita" />
+            <input type="date" [(ngModel)]="dataInicio" class="browser-default input-form-receita" />
           </div>
         </div>
-        <div class="col s4">
+        <div *ngIf="!usoContinuo" class="col s4">
           <label>Data de termino</label>
           <div style="display: flex; justify-content:flex-start;">
-            <input type="date" class="browser-default input-form-receita" />
+            <input type="date" [(ngModel)]="dataTermino" class="browser-default input-form-receita" />
           </div>
         </div>
       </div>
       <div style="margin-left: 0px; margin-top: 30px; display: flex; align-items: center; justify-content: center;" class="row">
 
-        <button style="display: flex; align-items: center; justify-content: space-around; color: #333;" class="waves-effect waves-light btn truncate blue lighten-5">
+        <button (click)="cancelarMedicamento()" style="display: flex; align-items: center; justify-content: space-around; color: #333;" class="waves-effect waves-light btn truncate blue lighten-5">
           <i style="margin-right: 5px;" class="material-icons">close</i>
           Cancelar medicamento
         </button>
 
-        <button style="margin-left: 20px; display: flex; align-items: center; justify-content: space-around;" class="waves-effect waves-light btn truncate blue darken-3">
+        <button (click)="receitarMedicamento()" style="margin-left: 20px; display: flex; align-items: center; justify-content: space-around;" class="waves-effect waves-light btn truncate blue darken-3">
           <i style="margin-right: 5px;" class="material-icons">add</i>
           Receitar medicamento
         </button>
@@ -96,7 +115,7 @@
       </div>
     </div>
 
-    <div style="margin-top: 20px; margin-left: 0px;" class="row">
+    <div *ngIf="tipoConsulta" style="margin-top: 20px; margin-left: 0px;" class="row">
       <div class="col s6">
         <label style="font-size: medium;">Lista de Medicamentos receitados:</label>
       </div>
@@ -105,41 +124,41 @@
           <i style="margin-right: 5px;" class="material-icons">insert_drive_file</i>
           Gerar receita
         </button>
-        <button style="margin-left: 10px;" class="waves-effect waves-light btn truncate">
+        <button *ngIf="!cadastrandoMedicamento" (click)="cadastrandoMedicamento = true" style="margin-left: 10px;" class="waves-effect waves-light btn truncate">
           <i class="material-icons">add</i>
         </button>
       </div>
     </div>
 
-    <div class="row">
+    <div *ngIf="tipoConsulta" class="row">
       <div class="row topo-tabela">
         <div class="col s2 titulo-tabela-inicio">Nome</div>
         <div class="col s2 titulo-tabela">Quantidade</div>
-        <div class="col s2 titulo-tabela">Intervalo</div>
+        <div class="col s3 titulo-tabela">Intervalo</div>
         <div class="col s2 titulo-tabela">Data de inicio</div>
         <div class="col s2 titulo-tabela">Data de termino</div>
-        <div class="col s2 titulo-tabela"></div>
+        <div class="col s1 titulo-tabela"></div>
       </div>
       <div class="row" *ngFor="let item of listaMedicamento">
-        <div class="col s2 conteudo-tabela-inicio truncate">{{item.nome}}</div>
+        <div class="col s2 conteudo-tabela truncate">{{item.nome}}</div>
         <div class="col s2 conteudo-tabela truncate">{{(item.tipoQuantidade != "Outro" ? item.numQuantidade + " " + item.tipoQuantidade : item.outraQuantidade)}}</div>
-        <div class="col s2 conteudo-tabela truncate">{{(item.tipoIntervalo != "Outro" ? "a cada " + item.numIntervalo + " " + item.tipoIntervalo : item.outroIntervalo)}}</div>
+        <div class="col s3 conteudo-tabela truncate">{{(item.tipoIntervalo != "Outro" ? "a cada " + item.numIntervalo + " " + item.tipoIntervalo : item.outroIntervalo)}}</div>
         <div class="col s2 conteudo-tabela truncate">{{item.dataInicio | date: 'dd/MM/yyyy'}}</div>
-        <div *ngIf="!item.usoContinuo" class="col s2 conteudo-tabela truncate">{{item.DataTermino | date: 'dd/MM/yyyy'}}</div>
+        <div *ngIf="!item.usoContinuo" class="col s2 conteudo-tabela truncate">{{item.dataTermino | date: 'dd/MM/yyyy'}}</div>
         <div *ngIf="item.usoContinuo" class="col s2 conteudo-tabela truncate">Uso contínuo</div>
-        <div class="col s2 menu-item-tabela">
-          <i class="material-icons menu-delete">delete</i>
+        <div class="col s1 menu-item-tabela">
+          <i (click)="deletarMedicamentoLista(item)" class="material-icons menu-delete">delete</i>
         </div>
       </div>
     </div>
 
-    <div style="margin-top: 50px;" class="row">
+    <div *ngIf="tipoConsulta" style="margin-top: 50px;" class="row">
       <div style="display: flex; align-items: center; justify-content: center;" class="col s12">
         <button (click)="cancelarConsulta()" style="display: flex; align-items: center; margin-right: 10px;" class="waves-effect waves-light btn truncate red darken-3">
           <i style="margin-right: 5px;" class="material-icons">close</i>
           Cancelar
         </button>
-        <button style="display: flex; align-items: center;" class="waves-effect waves-light btn truncate green darken-3">
+        <button (click)="concluirConsulta()" style="display: flex; align-items: center;" class="waves-effect waves-light btn truncate green darken-3">
           <i style="margin-right: 5px;" class="material-icons">check</i>
           Concluir consulta
         </button>

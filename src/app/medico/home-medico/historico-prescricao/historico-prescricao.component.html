@@ -43,17 +43,19 @@
     <div class="row">
       <div class="row topo-tabela">
         <div class="col s3 titulo-tabela-inicio">Nome do paciente</div>
-        <div class="col s3 titulo-tabela">Nome do medicamento</div>
-        <div class="col s2 titulo-tabela">Intervalo</div>
+        <div class="col s5 titulo-tabela">Medicamento</div>
         <div class="col s2 titulo-tabela">Data de inicio</div>
         <div class="col s2 titulo-tabela">Data de termino</div>
       </div>
       <div class="row" *ngFor="let item of listaFinal">
         <div class="col s3 conteudo-tabela-inicio truncate">{{item.paciente.nome}}</div>
-        <div class="col s3 conteudo-tabela truncate">{{item.medicamento.nome}} - {{(item.tipoQuantidade != "Outro" ? item.numQuantidade + " " + item.tipoQuantidade : item.outraQuantidade)}}</div>
-        <div class="col s2 conteudo-tabela truncate">{{(item.tipoIntervalo != "Outro" ? "a cada " + item.numIntervalo + " " + item.tipoIntervalo : item.outroIntervalo)}}</div>
+        <div class="col s5 conteudo-tabela truncate">
+          {{item.medicamento.nome}} -
+          {{(item.medicamento.tipoQuantidade != "Outro" ? item.medicamento.numQuantidade + " " + item.medicamento.tipoQuantidade : item.medicamento.outraQuantidade)}}
+          {{(item.medicamento.tipoIntervalo != "Outro" ? "a cada " + item.medicamento.numIntervalo + " " + item.medicamento.tipoIntervalo : item.medicamento.outroIntervalo)}}
+        </div>
         <div class="col s2 conteudo-tabela truncate">{{item.medicamento.dataInicio | date: 'dd/MM/yyyy'}}</div>
-        <div *ngIf="!item.medicamento.usoContinuo" class="col s2 conteudo-tabela truncate">{{item.medicamento.DataTermino | date: 'dd/MM/yyyy'}}</div>
+        <div *ngIf="!item.medicamento.usoContinuo" class="col s2 conteudo-tabela truncate">{{item.medicamento.dataTermino | date: 'dd/MM/yyyy'}}</div>
         <div *ngIf="item.medicamento.usoContinuo" class="col s2 conteudo-tabela truncate">Uso contínuo</div>
       </div>
     </div>

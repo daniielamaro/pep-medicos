@@ -12,4 +12,16 @@ export class CriarConsultaService {
     return await this.urlService.sendRequestPost("/Paciente/GetPacienteById?id="+id);
   }
 
+  async getListaConsulta(){
+    return await this.urlService.sendRequestPost("/Consulta/ListaTiposConsultas");
+  }
+
+  async cadastroConsulta(request: any){
+    return await this.urlService.sendRequestPost("/Consulta/CadastroConsulta", JSON.stringify(request));
+  }
+
+  async cadastroMedicamento(request: any){
+    return await this.urlService.sendRequestPost("/Medicamento/CadastroLista", JSON.stringify(request));
+  }
+
 }

@@ -55,7 +55,7 @@ export class HistoricoAtendimentoComponent implements OnInit {
   }
 
   async atualizarLista(){
-    switch(this.user.funcao){
+    switch(this.user.esp){
       case 'medico': await this.atualizarListaMedico(); break;
       case 'enfermeiro': await this.atualizarListaEnfermeiro(); break;
     }
@@ -66,7 +66,6 @@ export class HistoricoAtendimentoComponent implements OnInit {
     (await this.historicoAtendimentoService.getListaAtendimentosMedico())
       .subscribe((resp: any)=>{
         this.listaCompleta = resp;
-        console.log(this.listaCompleta);
         this.pesquisar();
         this.montarListaFinal(1);
         this.alertas.fecharModal();
@@ -78,7 +77,6 @@ export class HistoricoAtendimentoComponent implements OnInit {
     (await this.historicoAtendimentoService.getListaAtendimentosEnfermeiro())
       .subscribe((resp: any)=>{
         this.listaCompleta = resp;
-        console.log(this.listaCompleta);
         this.pesquisar();
         this.montarListaFinal(1);
         this.alertas.fecharModal();
@@ -90,7 +88,7 @@ export class HistoricoAtendimentoComponent implements OnInit {
     else this.pesquisaFiltrada = false;
 
     this.listaPesquisa = this.listaCompleta.filter(item => {
-      return item.nome
+      return item.paciente.nome
                 .toUpperCase()
                 .includes(this.nomePesquisa?.toUpperCase() ?? "");
     });
@@ -106,7 +104,7 @@ export class HistoricoAtendimentoComponent implements OnInit {
     this.paginaAtual = page;
 
     this.listaFinal = this.listaPesquisa.slice((this.paginaAtual-1)*this.tamanhoPagina, this.paginaAtual*this.tamanhoPagina);
-
+    console.log(this.listaFinal);
     this.montarPaginacao();
   }
 
