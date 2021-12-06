@@ -17,11 +17,11 @@ export class HomeAdministrativoService {
   }
 
   async deletarMedico(id: string){
-    return await this.urlService.sendRequestDelete("/Medico/DeleteAgente?id="+id);
+    return await this.urlService.sendRequestDelete("/Medico/DeleteMedico?id="+id);
   }
 
   async deletarEnfermeiro(id: string){
-    return await this.urlService.sendRequestDelete("/Enfermeiro/DeleteAgente?id="+id);
+    return await this.urlService.sendRequestDelete("/Enfermeiro/DeleteEnfermeiro?id="+id);
   }
 
 }
