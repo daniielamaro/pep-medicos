@@ -5,7 +5,7 @@ import { StorageService } from './storage.service';
 
 @Injectable()
 export class UrlService {
-726
+
   //static BACKEND_URL = 'http://localhost:54439';
   static BACKEND_URL = 'http://35.238.22.120:8080';
 
