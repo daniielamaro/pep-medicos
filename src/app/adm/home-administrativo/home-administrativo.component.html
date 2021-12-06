@@ -51,7 +51,7 @@
             <div *ngIf="item.funcao == 'agente'" class="col s3 conteudo-tabela">Agente Administrativo</div>
             <div class="col s2 menu-item-tabela">
               <i [routerLink]="'/cadastrar-funcionario/'+item.id+'/'+item.funcao" class="material-icons menu-edit">edit</i>
-              <i (click)="deletarFuncionario(item.id)" class="material-icons menu-delete">delete</i>
+              <i (click)="deletarFuncionario(item)" class="material-icons menu-delete">delete</i>
             </div>
           </div>
         </div>
