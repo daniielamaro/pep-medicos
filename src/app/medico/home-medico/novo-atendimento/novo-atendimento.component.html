@@ -30,7 +30,7 @@
 
             <div class="row">
 
-                <div *ngFor="let pessoa of dados"  style="cursor: pointer;" class="col s4">
+                <div *ngFor="let pessoa of dados" [routerLink]="'/medico/criar-consulta/'+pessoa.id" style="cursor: pointer;" class="col s4">
                   <div class="card-paciente">
                     <div class="row card-foto-perfil">
                       <div class="foto-perfil-area">

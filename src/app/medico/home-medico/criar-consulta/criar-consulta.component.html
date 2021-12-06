@@ -1,1 +1,150 @@
-<p>criar-consulta works!</p>
+<div class="area-conteudo">
+  <div class="content">
+
+    <div *ngIf="paciente" class="row area-paciente">
+      <div class="foto-paciente col s3">
+        <div class="foto-perfil-area">
+          <img *ngIf="paciente && paciente.fotoPerfil" [src]="'data:'+paciente.fotoPerfil.tipo+';base64,'+paciente.fotoPerfil.binario" width="100%" height="100%" />
+          <img *ngIf="!paciente || !paciente.fotoPerfil" src="../assets/nophoto.png" width="100%" height="100%" />
+        </div>
+      </div>
+      <div  class="col s9 area-info-paciente">
+        <span>{{paciente.nome}}</span>
+        <span>{{paciente.cpf}}</span>
+        <span>{{paciente.idade}} anos</span>
+      </div>
+    </div>
+
+    <div class="row area-diagnostico">
+       <div class="col s6">
+        <label>Resumo</label>
+        <textarea style="resize: none; height: auto;" rows="6" class="browser-default"></textarea>
+       </div>
+       <div class="col s6">
+        <label>Observações</label>
+        <textarea style="resize: none; height: auto;" rows="6" class="browser-default"></textarea>
+      </div>
+    </div>
+
+    <div style="margin-top: 20px; margin-left: 0px;" class="row">
+      <div class="col s12">
+        <label style="font-size: medium;">Receitar medicamento:</label>
+      </div>
+    </div>
+
+    <div style="margin-left: 0px;" class="row">
+      <div style="margin-left: 0px;" class="row">
+        <div class="col s12">
+          <label>Nome do medicamento</label>
+          <input type="text" class="browser-default input-form-receita" />
+        </div>
+      </div>
+      <div style="margin-left: 0px;" class="row">
+        <div class="col s6">
+          <label>Quantidade</label>
+          <div style="display: flex; justify-content:flex-start;">
+            <input type="number" style="width: 80px;" class="browser-default input-form-receita" />
+            <select style="margin-left: 10px;" class="browser-default input-form-receita">
+              <option disabled selected>--Selecione uma opção--</option>
+            </select>
+          </div>
+          <input type="text" placeholder="Digite a quantidade..." class="browser-default input-form-receita" />
+        </div>
+        <div class="col s6">
+          <label>Intervalo</label>
+          <div style="display: flex; justify-content:flex-start;">
+            <input type="number" style="width: 80px;" class="browser-default input-form-receita" />
+            <select style="margin-left: 10px;" class="browser-default input-form-receita">
+              <option disabled selected>--Selecione uma opção--</option>
+            </select>
+          </div>
+          <input type="text" placeholder="Digite o intervalo..." class="browser-default input-form-receita" />
+        </div>
+      </div>
+      <div style="margin-left: 0px;" class="row">
+        <div style="display: flex; align-items: center; justify-content: center; height: 80px" class="col s4">
+          <label>
+            <input type="checkbox" class="browser-default" />
+            <span>Uso continuo</span>
+          </label>
+        </div>
+        <div class="col s4">
+          <label>Data de inicio</label>
+          <div style="display: flex; justify-content:flex-start;">
+            <input type="date" class="browser-default input-form-receita" />
+          </div>
+        </div>
+        <div class="col s4">
+          <label>Data de termino</label>
+          <div style="display: flex; justify-content:flex-start;">
+            <input type="date" class="browser-default input-form-receita" />
+          </div>
+        </div>
+      </div>
+      <div style="margin-left: 0px; margin-top: 30px; display: flex; align-items: center; justify-content: center;" class="row">
+
+        <button style="display: flex; align-items: center; justify-content: space-around; color: #333;" class="waves-effect waves-light btn truncate blue lighten-5">
+          <i style="margin-right: 5px;" class="material-icons">close</i>
+          Cancelar medicamento
+        </button>
+
+        <button style="margin-left: 20px; display: flex; align-items: center; justify-content: space-around;" class="waves-effect waves-light btn truncate blue darken-3">
+          <i style="margin-right: 5px;" class="material-icons">add</i>
+          Receitar medicamento
+        </button>
+
+      </div>
+    </div>
+
+    <div style="margin-top: 20px; margin-left: 0px;" class="row">
+      <div class="col s6">
+        <label style="font-size: medium;">Lista de Medicamentos receitados:</label>
+      </div>
+      <div style="display: flex; justify-content: flex-end;" class="col s6">
+        <button *ngIf="listaMedicamento && listaMedicamento.length > 0" style="display: flex; align-items: center; justify-content: space-around;" class="waves-effect waves-light btn truncate">
+          <i style="margin-right: 5px;" class="material-icons">insert_drive_file</i>
+          Gerar receita
+        </button>
+        <button style="margin-left: 10px;" class="waves-effect waves-light btn truncate">
+          <i class="material-icons">add</i>
+        </button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="row topo-tabela">
+        <div class="col s2 titulo-tabela-inicio">Nome</div>
+        <div class="col s2 titulo-tabela">Quantidade</div>
+        <div class="col s2 titulo-tabela">Intervalo</div>
+        <div class="col s2 titulo-tabela">Data de inicio</div>
+        <div class="col s2 titulo-tabela">Data de termino</div>
+        <div class="col s2 titulo-tabela"></div>
+      </div>
+      <div class="row" *ngFor="let item of listaMedicamento">
+        <div class="col s2 conteudo-tabela-inicio truncate">{{item.nome}}</div>
+        <div class="col s2 conteudo-tabela truncate">{{(item.tipoQuantidade != "Outro" ? item.numQuantidade + " " + item.tipoQuantidade : item.outraQuantidade)}}</div>
+        <div class="col s2 conteudo-tabela truncate">{{(item.tipoIntervalo != "Outro" ? "a cada " + item.numIntervalo + " " + item.tipoIntervalo : item.outroIntervalo)}}</div>
+        <div class="col s2 conteudo-tabela truncate">{{item.dataInicio | date: 'dd/MM/yyyy'}}</div>
+        <div *ngIf="!item.usoContinuo" class="col s2 conteudo-tabela truncate">{{item.DataTermino | date: 'dd/MM/yyyy'}}</div>
+        <div *ngIf="item.usoContinuo" class="col s2 conteudo-tabela truncate">Uso contínuo</div>
+        <div class="col s2 menu-item-tabela">
+          <i class="material-icons menu-delete">delete</i>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 50px;" class="row">
+      <div style="display: flex; align-items: center; justify-content: center;" class="col s12">
+        <button (click)="cancelarConsulta()" style="display: flex; align-items: center; margin-right: 10px;" class="waves-effect waves-light btn truncate red darken-3">
+          <i style="margin-right: 5px;" class="material-icons">close</i>
+          Cancelar
+        </button>
+        <button style="display: flex; align-items: center;" class="waves-effect waves-light btn truncate green darken-3">
+          <i style="margin-right: 5px;" class="material-icons">check</i>
+          Concluir consulta
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
