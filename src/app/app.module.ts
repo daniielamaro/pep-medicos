@@ -22,6 +22,8 @@ import { HomeAdministrativoService } from './adm/home-administrativo/home-admini
 import { HistoricoPrescricaoComponent } from './medico/home-medico/historico-prescricao/historico-prescricao.component';
 import { HistoricoPrescricaoService } from './medico/home-medico/historico-prescricao/historico-prescricao.service';
 import { HistoricoAtendimentoService } from './medico/home-medico/historico-atendimento/historico-atendimento.service';
+import { CriarConsultaComponent } from './medico/home-medico/criar-consulta/criar-consulta.component';
+import { CriarConsultaService } from './medico/home-medico/criar-consulta/criar-consulta.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { HistoricoAtendimentoService } from './medico/home-medico/historico-aten
     CadastrarFuncionarioComponent,
     NovoAtendimentoComponent,
     HistoricoAtendimentoComponent,
-    HistoricoPrescricaoComponent
+    HistoricoPrescricaoComponent,
+    CriarConsultaComponent
    ],
   imports: [
     BrowserModule,
@@ -54,7 +57,8 @@ import { HistoricoAtendimentoService } from './medico/home-medico/historico-aten
     Alertas,
     HomeAdministrativoService,
     HistoricoAtendimentoService,
-    HistoricoPrescricaoService
+    HistoricoPrescricaoService,
+    CriarConsultaService
   ],
   bootstrap: [AppComponent]
 })
