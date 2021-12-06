@@ -1,7 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Alertas } from 'src/app/shared/class/alertas';
 import { CriarConsultaService } from './criar-consulta.service';
+
+import jsPDF from 'jspdf';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+import htmlToPdfmake from 'html-to-pdfmake';
+import { StorageService } from 'src/app/shared/class/storage.service';
+import { UrlService } from 'src/app/shared/class/url-service';
 
 @Component({
   selector: 'app-criar-consulta',
@@ -9,6 +17,10 @@ import { CriarConsultaService } from './criar-consulta.service';
   styleUrls: ['./criar-consulta.component.scss']
 })
 export class CriarConsultaComponent implements OnInit {
+
+  @ViewChild('pdfTable') pdfTable: ElementRef;
+
+  user: any;
 
   paciente: any
   listaMedicamento: any[] = [];
@@ -19,6 +31,8 @@ export class CriarConsultaComponent implements OnInit {
 
   resumo: string = "";
   observacoes: string = "";
+
+  dataHoje: Date = new Date();
 
   nomeMedicamento: string = "";
   numQuantidade: number = undefined;
@@ -35,10 +49,30 @@ export class CriarConsultaComponent implements OnInit {
     private alertas: Alertas,
     private actvRouter: ActivatedRoute,
     private criarConsultaService: CriarConsultaService,
-    private router: Router
+    private router: Router,
+    private storage: StorageService,
+    private urlService: UrlService
   ) {}
 
-  ngOnInit(): void {
+  public downloadAsPDF() {
+    const doc = new jsPDF();
+
+    const pdfTable = this.pdfTable.nativeElement;
+
+    var html = htmlToPdfmake(pdfTable.innerHTML);
+
+    const documentDefinition = { content: html };
+    pdfMake.createPdf(documentDefinition).open();
+
+  }
+
+  async ngOnInit(): Promise<void> {
+    this.user = await this.storage.get("user");
+    let token = await this.storage.get("token");
+    await this.urlService.validateToken(token);
+
+    console.log(this.user);
+
     this.actvRouter.params.subscribe(async params => {
       let id = params['id'];
       if(id){

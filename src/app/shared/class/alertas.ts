@@ -48,6 +48,31 @@ export class Alertas {
             });
     }
 
+    async trocarSenha(){
+      const { value: formValues } = await Swal.fire({
+        title: 'Trocar senha',
+        html:
+          '<div style="display: flex;">' +
+          '<input id="senhaAtual" type="password" placeholder="Senha atual">' +
+          '</div>' +
+          '<div style="display: flex;">' +
+          '<input id="novaSenha" type="password" placeholder="Nova senha">'+
+          '<input id="confNovaSenha" type="password" placeholder="Confirme nova senha">' +
+          '</div>',
+        focusConfirm: false,
+        confirmButtonText: 'Trocar',
+        cancelButtonText: 'Cancelar',
+        preConfirm: () => {
+          return [
+            (<HTMLInputElement>document.getElementById('senhaAtual')).value,
+            (<HTMLInputElement>document.getElementById('novaSenha')).value,
+            (<HTMLInputElement>document.getElementById('confNovaSenha')).value
+          ]
+        }
+      })
+
+      return formValues;
+    }
 
     showLoading(title: string) {
         return Swal.fire({

@@ -24,6 +24,7 @@ import { HistoricoPrescricaoService } from './medico/home-medico/historico-presc
 import { HistoricoAtendimentoService } from './medico/home-medico/historico-atendimento/historico-atendimento.service';
 import { CriarConsultaComponent } from './medico/home-medico/criar-consulta/criar-consulta.component';
 import { CriarConsultaService } from './medico/home-medico/criar-consulta/criar-consulta.service';
+import { AppService } from './app.service';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { CriarConsultaService } from './medico/home-medico/criar-consulta/criar-
     HomeAdministrativoService,
     HistoricoAtendimentoService,
     HistoricoPrescricaoService,
-    CriarConsultaService
+    CriarConsultaService,
+    AppService
   ],
   bootstrap: [AppComponent]
 })

@@ -120,7 +120,7 @@
         <label style="font-size: medium;">Lista de Medicamentos receitados:</label>
       </div>
       <div style="display: flex; justify-content: flex-end;" class="col s6">
-        <button *ngIf="listaMedicamento && listaMedicamento.length > 0" style="display: flex; align-items: center; justify-content: space-around;" class="waves-effect waves-light btn truncate">
+        <button (click)="downloadAsPDF()" *ngIf="listaMedicamento && listaMedicamento.length > 0" style="display: flex; align-items: center; justify-content: space-around;" class="waves-effect waves-light btn truncate">
           <i style="margin-right: 5px;" class="material-icons">insert_drive_file</i>
           Gerar receita
         </button>
@@ -129,6 +129,8 @@
         </button>
       </div>
     </div>
+
+
 
     <div *ngIf="tipoConsulta" class="row">
       <div class="row topo-tabela">
@@ -165,5 +167,82 @@
       </div>
     </div>
 
+  </div>
+</div>
+
+<div id="pdfTable" *ngIf="user && paciente" style="display: none;" #pdfTable>
+  <div style="text-align: center;">
+    <span style="color: black; font-size: 17px;">{{user.clinica.nomeClinica}}</span>
+    <br/>
+    <br/>
+    <span style="color: black; font-size: 14px;">
+      {{user.clinica.endereco.logradouro}}
+      {{user.clinica.endereco.logradouro +
+        (user.clinica.endereco.numero ? ", "+user.clinica.endereco.numero : ", S/N") +
+        " - " +user.clinica.endereco.bairro + " - " + user.clinica.endereco.localidade  + ", " + user.clinica.endereco.uf
+      }}
+    </span>
+  </div>
+  <hr/>
+  <div style="text-align: left; width: 50%;">
+    <span style="color: black; font-size: 22px;">Receituário:</span>
+  </div>
+  <div style="text-align: right; width: 50%;">
+    <span style="color: black; font-size: 13px;">Data da receita: {{dataHoje | date: 'dd/MM/yyyy'}}</span>
+  </div>
+  <br/>
+  <br/>
+  <br/>
+  <div style="text-align: left; width: 50%;">
+    <span style="color: black; font-size: 15px;">Paciente: </span>
+    <span style="color: black; font-size: 13px;">{{paciente.nome}}</span>
+  </div>
+  <div style="text-align: left; width: 50%;">
+    <span style="color: black; font-size: 15px;">Endereço: </span>
+    <span style="color: black; font-size: 13px;">{{paciente.endereco}}</span>
+  </div>
+  <div style="text-align: left; width: 50%;">
+    <span style="color: black; font-size: 15px;">RG: </span>
+    <span style="color: black; font-size: 13px;">{{paciente.rg}}</span>
+  </div>
+  <div style="text-align: left; width: 50%;">
+    <span style="color: black; font-size: 15px;">CPF: </span>
+    <span style="color: black; font-size: 13px;">{{paciente.cpf}}</span>
+  </div>
+  <br/>
+  <br/>
+  <br/>
+  <div style="text-align: left; width: 50%;">
+    <span style="color: black; font-size: 20px;">Prescrição:</span>
+  </div>
+  <br/>
+  <table border="0">
+    <thead>
+      <tr>
+        <td>Posologia</td>
+        <td>Data de inicio</td>
+        <td>Data de termino</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of listaMedicamento">
+        <td style="padding: 5px;">
+          {{item.nome}} -
+          {{(item.tipoQuantidade != "Outro" ? item.numQuantidade + " " + item.tipoQuantidade : item.outraQuantidade)}}
+          {{(item.tipoIntervalo != "Outro" ? "a cada " + item.numIntervalo + " " + item.tipoIntervalo : item.outroIntervalo)}}
+        </td>
+        <td style="padding: 5px;">{{item.dataInicio | date: 'dd/MM/yyyy'}}</td>
+        <td *ngIf="!item.usoContinuo" class="col s2 conteudo-tabela truncate" style="padding: 5px;">{{item.dataTermino | date: 'dd/MM/yyyy'}}</td>
+        <td *ngIf="item.usoContinuo" class="col s2 conteudo-tabela truncate" style="padding: 5px;">Uso contínuo</td>
+      </tr>
+    </tbody>
+  </table>
+  <br/>
+  <br/>
+  <br/>
+  <hr/>
+  <div style="text-align: center; width: 100%;">
+    <span style="color: black; font-size: 14px;">{{user.nome}}</span><br/>
+    <span style="color: black; font-size: 14px;">Assinatura e Carimbo</span>
   </div>
 </div>

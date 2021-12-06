@@ -4,10 +4,6 @@
     <div *ngIf="user && router.url != '/login'" class="col s12 l3">
       <div class="area-perfil">
         <div class="perfil">
-          <div class="foto-perfil-area">
-            <img *ngIf="user && user.fotoPerfil" [src]="'data:'+user.fotoPerfil.tipo+';base64,'+user.fotoPerfil.binario" width="100%" height="100%" />
-            <img *ngIf="!user || !user.fotoPerfil" src="../assets/nophoto.png" width="100%" height="100%" />
-          </div>
           <span class="nome-perfil">{{user.nome}}</span>
 
           <span *ngIf="user.esp == 'medico'" class="">CRM: {{user.crm}}</span>
@@ -17,6 +13,9 @@
           <span *ngIf="user.esp == 'agente'" class="especialidade-perfil">Agente Administrativo</span>
           <span *ngIf="user.esp == 'medico'" class="especialidade-perfil">Médico(a)</span>
           <span *ngIf="user.esp == 'enfermeiro'" class="especialidade-perfil">Enfermeiro(a)</span>
+        </div>
+        <div class="display: flex; justify-content: center">
+          <button (click)="editarPerfil()" class="waves-effect waves-light btn">Trocar senha</button>
         </div>
         <button (click)="sair()" class="waves-effect waves-light btn red darken-2">Sair</button>
       </div>
