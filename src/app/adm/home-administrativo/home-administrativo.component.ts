@@ -128,7 +128,7 @@ export class HomeAdministrativoComponent implements OnInit {
       .then(async (result) => {
         if (result.isConfirmed) {
           this.alertas.showLoading("Deletando agente administrativo...");
-          (await this.homeAdministrativoService.deletarMedico(id))
+          (await this.homeAdministrativoService.deletarAgente(id))
             .subscribe(async () => {
               this.alertas.fecharModal();
               this.alertas.sucesso("Agente administrativo deletado!");
@@ -166,7 +166,7 @@ export class HomeAdministrativoComponent implements OnInit {
       .then(async (result) => {
         if (result.isConfirmed) {
           this.alertas.showLoading("Deletando enfermeiro(a)...");
-          (await this.homeAdministrativoService.deletarMedico(id))
+          (await this.homeAdministrativoService.deletarEnfermeiro(id))
             .subscribe(async () => {
               this.alertas.fecharModal();
               this.alertas.sucesso("Enfermeiro(a) deletado!");
