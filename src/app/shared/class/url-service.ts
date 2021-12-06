@@ -6,8 +6,8 @@ import { StorageService } from './storage.service';
 @Injectable()
 export class UrlService {
 
-  static BACKEND_URL = 'http://localhost:54439';
-  //static BACKEND_URL = 'http://35.238.22.120:8080';
+  //static BACKEND_URL = 'http://localhost:54439';
+  static BACKEND_URL = 'http://35.238.22.120:8080';
 
   constructor(private storage: StorageService, private router: Router, private http: HttpClient) {}
 
