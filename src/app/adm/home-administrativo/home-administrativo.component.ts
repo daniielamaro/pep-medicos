@@ -115,15 +115,61 @@ export class HomeAdministrativoComponent implements OnInit {
 
   }
 
-  deletarFuncionario(id: string){
-    this.alertas.warningAlert("Realmente deseja deletar este funcionário?")
+  deletarFuncionario(func: any){
+    switch(func.funcao){
+      case "agente": this.deletarAgente(func.id); break;
+      case "medico": this.deletarMedico(func.id); break;
+      case "enfermeiro": this.deletarEnfermeiro(func.id); break;
+    }
+  }
+
+  deletarAgente(id: string){
+    this.alertas.warningAlert("Realmente deseja deletar este agente administrativo?")
       .then(async (result) => {
         if (result.isConfirmed) {
-          this.alertas.showLoading("Deletando funcionario...");
-          (await this.homeAdministrativoService.deletarFuncionario(id))
+          this.alertas.showLoading("Deletando agente administrativo...");
+          (await this.homeAdministrativoService.deletarAgente(id))
             .subscribe(async () => {
               this.alertas.fecharModal();
-              this.alertas.sucesso("Funcionario deletado!");
+              this.alertas.sucesso("Agente administrativo deletado!");
+              await this.atualizarLista();
+            },
+            error => {
+              this.alertas.fecharModal();
+              this.alertas.erro(error.error);
+            });
+        }
+      });
+  }
+
+  deletarMedico(id: string){
+    this.alertas.warningAlert("Realmente deseja deletar este médico(a)?")
+      .then(async (result) => {
+        if (result.isConfirmed) {
+          this.alertas.showLoading("Deletando médico(a)...");
+          (await this.homeAdministrativoService.deletarMedico(id))
+            .subscribe(async () => {
+              this.alertas.fecharModal();
+              this.alertas.sucesso("Médico(a) deletado!");
+              await this.atualizarLista();
+            },
+            error => {
+              this.alertas.fecharModal();
+              this.alertas.erro(error.error);
+            });
+        }
+      });
+  }
+
+  deletarEnfermeiro(id: string){
+    this.alertas.warningAlert("Realmente deseja deletar este enfermeiro(a)?")
+      .then(async (result) => {
+        if (result.isConfirmed) {
+          this.alertas.showLoading("Deletando enfermeiro(a)...");
+          (await this.homeAdministrativoService.deletarEnfermeiro(id))
+            .subscribe(async () => {
+              this.alertas.fecharModal();
+              this.alertas.sucesso("Enfermeiro(a) deletado!");
               await this.atualizarLista();
             },
             error => {
